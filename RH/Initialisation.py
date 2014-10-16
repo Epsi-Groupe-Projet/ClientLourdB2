@@ -28,6 +28,7 @@ def start():
 			#suivi
 
 			print "La Base de donnee suivante a etait cree : "+Parametre.dbname
+			connexion.ConnexionBd(Parametre.dbname)
 		else:
 			print "La Base de donnee suivante existe deja : "+Parametre.dbname
 			connexion.ConnexionBd(Parametre.dbname)
@@ -35,16 +36,6 @@ def start():
 	except MySQLdb.OperationalError,message: 
 
 		print "Erreur : {0}".format(message)
-
-	finally:
-
-		try: 
-
-			connexion.GetConnexion.close()
-			
-		except: 
-
-			pass
 
 	return connexion
 
