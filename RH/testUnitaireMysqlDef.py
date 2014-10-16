@@ -28,7 +28,7 @@ class TestExecuteSQLFonctionne(unittest.TestCase):
 		# s'attend a ce que les deux elements soient gaux. Sinon
 	    # le test echoue.
 		self.assertEqual(result.fetchall()[0][0],self.motTest)
-		requete = '''DROP TABLE test'''
+		requete = '''DROP TABLE table_test'''
 		MysqlDef.executeRequete(connexion.GetConnexion(),requete)
 		requete = '''DROP DATABASE testDb'''
 		MysqlDef.executeRequete(connexion.GetConnexion(),requete)
