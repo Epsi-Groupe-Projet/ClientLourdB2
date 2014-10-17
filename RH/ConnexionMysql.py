@@ -5,6 +5,7 @@ class ConnexionServeur():
 	muser = None
 	mhost = None
 	mpasswd = None
+	mdbname = None
 
 	# Constructeur
 
@@ -34,6 +35,7 @@ class ConnexionServeur():
 	def ConnexionBd(self,pdbname):
 
 		self.mdbname = pdbname
+
 		#Connexion au serveur MYSQL + base de donnee
 
 		self.connexion.close()
@@ -60,3 +62,6 @@ class ConnexionServeur():
 
 	def Close(self):
 		self.connexion.close()
+
+	def GetDbName(self):
+		return self.mdbname

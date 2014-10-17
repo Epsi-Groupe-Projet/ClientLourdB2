@@ -2,11 +2,9 @@ import MySQLdb
 
 def executeRequete(connexion,requete):
 
-    # execute une requete
-
     # on demande un curseur
 
-    curseur = connexion.cursor()
+    curseur = connexion.GetConnexion().cursor()
 
     # execute la requete SQL sur la connexion
 
@@ -17,7 +15,90 @@ def executeRequete(connexion,requete):
 
     except MySQLdb.OperationalError,message:
 
+        # Suivi
+
         print "Erreur : {0}, pour la requete: {1}".format(message, requete)
 
     finally:
         return curseur
+
+# Fonction qui test l'existance d'une bd puis la cree si elle n'existe pas
+
+def existanceBd(connexion,nameBd):
+    # Test si la base de donne existe
+
+    try: 
+        requete = "SHOW DATABASES LIKE '"+nameBd+"' ;"
+        result = executeRequete(connexion,requete)
+
+        # Test de l'existance de la table puis creation sinon
+
+        if not result.fetchall() :
+
+            #suivi
+
+            print "La Base de donnee suivante est inexistante : "+nameBd
+            requete = "CREATE DATABASE "+nameBd+";"
+            executeRequete(connexion,requete)
+
+            #suivi
+
+            print "La Base de donnee suivante a etait cree : "+nameBd
+            connexion.ConnexionBd(nameBd)
+        else:
+            print "La Base de donnee suivante existe deja : "+nameBd
+            connexion.ConnexionBd(nameBd)
+
+    except MySQLdb.OperationalError,message: 
+
+        print "Erreur : {0}".format(message)
+
+# Fonction qui test l'existance d'une table et la cree si elle n'existe pas
+
+def existanceTable(connexion, nameTable, columnTable):
+
+    # Test si la table existe
+
+    try: 
+        requete = "SELECT * FROM information_schema.tables WHERE table_name = \'"+nameTable+"\'"
+        result = executeRequete(connexion,requete)
+
+        # Test de l'existance de la table puis creation sinon
+
+        if not result.fetchall() :
+
+            # Suivi
+
+            print "La table suivante est inexistante : "+nameTable
+
+            # Creation de la requette pour la creation de la table
+
+            requete = "CREATE TABLE "+nameTable+" "
+            requete = requete + '('
+            for column in columnTable:
+                for champ in column:
+                    requete = requete + ' ' + champ
+                requete = requete + ', '
+
+            # En suprime la , en trop
+            requete = requete[:-2]
+            requete = requete + ')'
+
+            # Selection de la base
+            dbName = connexion.GetDbName()
+            requete = "USE "+ dbName +" ; " + requete
+
+            # Execution
+            executeRequete(connexion,requete)
+            print "La table suivante a etait cree : "+nameTable
+        
+        else:
+
+            # Suivi
+
+            print "La table suivante existe deja : "+nameTable
+            
+
+    except MySQLdb.OperationalError,message: 
+
+        print "Erreur : {0}".format(message)
