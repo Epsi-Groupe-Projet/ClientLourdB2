@@ -12,8 +12,8 @@ prenom_employe = ['prenom_employe','VARCHAR(50)','NOT NULL']
 column_employe.append(prenom_employe)
 nom_employe = ['nom_employe','VARCHAR(50)','NOT NULL']
 column_employe.append(nom_employe)
-date_embauche = ['date_embauche','DATE','NOT NULL']
-column_employe.append(date_embauche)
+date_embauche_employe = ['date_embauche_employe','DATE','NOT NULL']
+column_employe.append(date_embauche_employe)
 salaire_employe = ['salaire_employe','FLOAT','NOT NULL']
 column_employe.append(salaire_employe)
 adresse_l1_employe = ['adresse_l1_employe','VARCHAR(50)','NOT NULL']
@@ -44,7 +44,7 @@ dico['employe'] = column_employe
 id_service = ['id_service','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
 column_service = [id_service]
 libelle_service = ['libelle_service','VARCHAR(50)','NOT NULL']
-column_service.append(column_service)
+column_service.append(libelle_service)
 id_service_service = ['id_service_service','INT','NOT NULL']
 column_service.append(id_service_service)
 
