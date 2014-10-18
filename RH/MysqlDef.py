@@ -11,23 +11,26 @@ def executeRequete(connexion,requete):
     if connexion.GetDbName() is not None:
         # Selection de la base
         dbName = connexion.GetDbName()
-        requete = "USE "+ dbName +" ; " + requete
+        requeteDb = "USE "+ dbName +" ; " 
 
+        curseur.execute(requeteDb)
 
     # execute la requete SQL sur la connexion
 
     try:
         curseur.execute(requete)
 
-        connexion.commit()
-
+        
     except MySQLdb.OperationalError,message:
 
         # Suivi
 
         print "Erreur : {0}, pour la requete: {1}".format(message, requete)
+        return False
 
     finally:
+
+        connexion.GetConnexion().commit()
         return curseur
 
 # Fonction qui test l'existance d'une bd puis la cree si elle n'existe pas
