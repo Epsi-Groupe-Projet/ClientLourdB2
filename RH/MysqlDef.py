@@ -13,6 +13,7 @@ def executeRequete(connexion,requete):
         dbName = connexion.GetDbName()
         requete = "USE "+ dbName +" ; " + requete
 
+
     # execute la requete SQL sur la connexion
 
     try:
@@ -90,6 +91,7 @@ def existanceTable(connexion, nameTable, columnTable):
             # En suprime la , en trop
             requete = requete[:-2]
             requete = requete + ')'
+
 
             # Execution
             executeRequete(connexion,requete)
