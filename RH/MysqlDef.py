@@ -8,11 +8,11 @@ def executeRequete(connexion,requete):
 
     # Selection de la base si elle est specifier dans la connexion
 
-    if connexion.GetDbName() not None:
+    if connexion.GetDbName() is not None:
         # Selection de la base
         dbName = connexion.GetDbName()
         requete = "USE "+ dbName +" ; " + requete
-        
+
     # execute la requete SQL sur la connexion
 
     try:
