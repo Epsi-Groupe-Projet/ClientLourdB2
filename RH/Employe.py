@@ -189,10 +189,4 @@ class Employe():
 
 			else:
 				print "Modification(etape insertion) de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
-
-				# Recuperation de l'id de l'employe
-				requete = "SELECT id_employe FROM employe WHERE nom_employe = \'"+self.mnom_employe+"\' AND prenom_employe = \'"+self.mprenom_employe+"\'"
-				result = MysqlDef.executeRequete(connexion,requete)
-				self.mid_employe = str(result.fetchall()[0][0])
-
 				return True

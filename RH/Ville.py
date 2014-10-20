@@ -68,8 +68,4 @@ class Ville():
 
 			else:
 				print "Modification(etape insertion) de la ville: {0}, a reussi".format(self.mlibelle_ville)
-				# Recuperation de l'id de la ville
-				requete = "SELECT id_ville FROM ville WHERE libelle_ville = \'"+self.mlibelle_ville+"\'"
-				result = MysqlDef.executeRequete(connexion,requete)
-				self.mid_ville = str(result.fetchall()[0][0])
 				return True
