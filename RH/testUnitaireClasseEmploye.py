@@ -1,5 +1,6 @@
 import unittest
 import Employe
+import Ville
 import Parametre
 import MysqlDef
 import ConnexionMysql
@@ -9,7 +10,8 @@ class TestClasseEmploye(unittest.TestCase):
 
 	def setUp(self):
     	#Initialisation des tests
-		self.employeATester = Employe.Employe(None,'Yassine','Faris','1992-12-21','2500.5','19 rue Solle','','33200','330','0663362470','yass-faris@hotmail.fr','FAIL','Chef de service Informatique','2','1')
+		self.villeEmploye = Ville.Ville('1','Marseille')
+		self.employeATester = Employe.Employe(None,'Yassine','Faris','1992-12-21','2500.5','19 rue Solle','','33200',self.villeEmploye,'0663362470','yass-faris@hotmail.fr','FAIL','Chef de service Informatique','2','1')
 
 	# Test de la recuperation de l'id de l'employe
 	def test_GetIdEmploye(self):
@@ -79,13 +81,13 @@ class TestClasseEmploye(unittest.TestCase):
 		self.assertEqual(self.employeATester.GetCPEmploye(),'33000')
 
 	# Test de la recuperation de l'identifiant de la ville de l'employe
-	def test_GetIdVilleEmploye(self):
-		self.assertEqual(self.employeATester.GetIdVilleEmploye(),'330')
+	def test_GetVilleEmploye(self):
+		self.assertEqual(self.employeATester.GetVilleEmploye(),self.villeEmploye)
 
 	# Test de la modification de l'identifiant de la ville  de l'employe
-	def test_SetIdVilleEmploye(self):
-		self.employeATester.SetIdVilleEmploye('331')
-		self.assertEqual(self.employeATester.GetIdVilleEmploye(),'331')
+	def test_SetVilleEmploye(self):
+		self.employeATester.SetVilleEmploye(self.villeEmploye)
+		self.assertEqual(self.employeATester.GetVilleEmploye(),self.villeEmploye)
 
 		# Test de la recuperation du telephone de l'employe
 	def test_GetTelephoneEmploye(self):
@@ -141,8 +143,8 @@ class TestClasseEmploye(unittest.TestCase):
 		self.employeATester.SetIdServiceEmploye('6')
 		self.assertEqual(self.employeATester.GetIdServiceEmploye(),'6')
 
-	# Test qui verifie le fonction de la methode EmployerIntoTable
-	def test_EmployerIntoTable(self):
+	# Test qui verifie le fonction de la methode EmployerIntoTable et d'une nouvelle insertion
+	def test_EmployerIntoTableNouveau(self):
 		connexion = ConnexionMysql.ConnexionServeur(Parametre.host,Parametre.user,Parametre.passwd)
 		requete = '''CREATE DATABASE testDb'''
 		MysqlDef.executeRequete(connexion,requete)
@@ -161,6 +163,27 @@ class TestClasseEmploye(unittest.TestCase):
 		requete = '''DROP DATABASE testDb'''
 		MysqlDef.executeRequete(connexion,requete)
 
+	# Test qui verifie la modification d'une entrer en base
+	def test_EmployerIntoTableExistant(self):
+		connexion = ConnexionMysql.ConnexionServeur(Parametre.host,Parametre.user,Parametre.passwd)
+		requete = '''CREATE DATABASE testDb'''
+		MysqlDef.executeRequete(connexion,requete)
+		connexion.ConnexionBd("testDb")
+		for nameTable in Parametre.dico.keys():
+			MysqlDef.existanceTable(connexion,nameTable,Parametre.dico[nameTable])
+
+		self.employeATester.EmployerIntoTable(connexion)
+		self.employeATester.SetNomEmploye('Fares')
+		self.employeATester.EmployerIntoTable(connexion)
+		requete = '''SELECT nom_employe FROM `employe` '''
+		result = MysqlDef.executeRequete(connexion,requete)
+		# s'attend a ce que les deux elements soient gaux. Sinon
+	    # le test echoue.
+		self.assertEqual(result.fetchall()[0][0],self.employeATester.GetNomEmploye())
+
+		# Suppresion de la db test
+		requete = '''DROP DATABASE testDb'''
+		MysqlDef.executeRequete(connexion,requete)
 
 
 
