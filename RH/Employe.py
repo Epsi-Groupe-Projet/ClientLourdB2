@@ -143,25 +143,43 @@ class Employe():
 	def EmployerIntoTable(self,connexion):
 
 		# Si l'employe ne possede pas d'id cela veut dire que l'employe n'existe pas dans la table
+
 		if self.mid_employe is None:
-			requete = "INSERT INTO employe (prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES (\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mid_ville_employe+","+self.mtelephone_employe+",\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mid_grade_employe+","+self.mid_service_employe+");"
-			
-			if MysqlDef.executeRequete(connexion,requete) == False:
-				print "Insertion de l'employe: {0} {1}, a echoue".format(self.mprenom_employe, self.mnom_employe)
 
-			else:
-				print "Insertion de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
+			# On teste si l'employe existe deja dans la table
 
-			# Recuperation de l'id de l'employe
 			requete = "SELECT id_employe FROM employe WHERE nom_employe = \'"+self.mnom_employe+"\' AND prenom_employe = \'"+self.mprenom_employe+"\'"
 			result = MysqlDef.executeRequete(connexion,requete)
-			self.mid_employe = result.fetchall()[0][0]
+
+			try:
+				result.fetchall()[0][0] is None
+			except IndexError:
+				requete = "INSERT INTO employe (prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES (\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mid_ville_employe+","+self.mtelephone_employe+",\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mid_grade_employe+","+self.mid_service_employe+");"
+				
+				if MysqlDef.executeRequete(connexion,requete) == False:
+					print "Insertion de l'employe: {0} {1}, a echoue".format(self.mprenom_employe, self.mnom_employe)
+					return False
+
+				else:
+					print "Insertion de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
+	
+			else:
+				print "L'employe {0} {1} existe deja dans la table ajout impossible".format(self.mprenom_employe,self.mnom_employe)
+				return False
+
+
+				# Recuperation de l'id de l'employe
+				requete = "SELECT id_employe FROM employe WHERE nom_employe = \'"+self.mnom_employe+"\' AND prenom_employe = \'"+self.mprenom_employe+"\'"
+				result = MysqlDef.executeRequete(connexion,requete)
+				self.mid_employe = result.fetchall()[0][0]
+				return True
 
 		# Sinon l'employe existe deja alors on le modifie (on le supprimant d'abort puis on l'ajoutant)
 		else:
 			requete = "DELETE FROM employe WHERE id_employe = \'"+self.mid_employe+"\'"
 			if MysqlDef.executeRequete(connexion,requete) == False:
 				print "Modififcation(etape suppression) de l'employe: {0} {1}, a echoue".format(self.mprenom_employe, self.mnom_employe)
+				return False
 
 			else:
 				print "Modification(etape suppression) de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
@@ -170,6 +188,8 @@ class Employe():
 			
 			if MysqlDef.executeRequete(connexion,requete) == False:
 				print "Modification(etape insertion) de l'employe: {0} {1}, a echoue".format(self.mprenom_employe, self.mnom_employe)
+				return False
 
 			else:
 				print "Modification(etape insertion) de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
+				return True
