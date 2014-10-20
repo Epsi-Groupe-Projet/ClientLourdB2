@@ -1,7 +1,7 @@
 import MysqlDef
 
 class Employe():
-	def __init__(self,pid_employe,pprenom_employe,pnom_employe,pdate_embauche_employe,psalaire_employe,padresse_l1_employe,padresse_l2_employe,pcp_employe,pid_ville_employe,ptelephone_employe,pemail_employe,pcommentaire_employe,pposte_employe,	pid_grade_employe, pid_service_employe):
+	def __init__(self,pid_employe,pprenom_employe,pnom_employe,pdate_embauche_employe,psalaire_employe,padresse_l1_employe,padresse_l2_employe,pcp_employe,pville_employe,ptelephone_employe,pemail_employe,pcommentaire_employe,pposte_employe,	pid_grade_employe, pid_service_employe):
 		self.mid_employe = pid_employe
 		self.mprenom_employe = pprenom_employe
 		self.mnom_employe = pnom_employe
@@ -10,7 +10,7 @@ class Employe():
 		self.madresse_l1_employe = padresse_l1_employe
 		self.madresse_l2_employe = padresse_l2_employe
 		self.mcp_employe = pcp_employe
-		self.mid_ville_employe = pid_ville_employe
+		self.mville_employe = pville_employe
 		self.mtelephone_employe = ptelephone_employe
 		self.memail_employe = pemail_employe
 		self.mcommentaire_employe = pcommentaire_employe
@@ -84,12 +84,11 @@ class Employe():
 		self.mcp_employe = pcp_employe
 
 	# Methode pour recuper l'identifiant de la ville de l'employe
-	def GetIdVilleEmploye(self):
-		return self.mid_ville_employe
-
+	def GetVilleEmploye(self):
+		return self.mville_employe
 	# Procedure pour modifier l'identifiant de la ville de l'employe
-	def SetIdVilleEmploye(self, pid_ville_employe):
-		self.mid_ville_employe = pid_ville_employe
+	def SetVilleEmploye(self, pville_employe):
+		self.mville_employe = pville_employe
 
 	# Methode pour recuper le telephone  de l'employe
 	def GetTelephoneEmploye(self):
@@ -154,7 +153,7 @@ class Employe():
 			try:
 				result.fetchall()[0][0] is None
 			except IndexError:
-				requete = "INSERT INTO employe (prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES (\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mid_ville_employe+","+self.mtelephone_employe+",\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mid_grade_employe+","+self.mid_service_employe+");"
+				requete = "INSERT INTO employe (prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES (\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mville_employe.GetIdVille()+","+self.mtelephone_employe+",\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mid_grade_employe+","+self.mid_service_employe+");"
 				
 				if MysqlDef.executeRequete(connexion,requete) == False:
 					print "Insertion de l'employe: {0} {1}, a echoue".format(self.mprenom_employe, self.mnom_employe)
@@ -184,7 +183,7 @@ class Employe():
 			else:
 				print "Modification(etape suppression) de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
 
-			requete = "INSERT INTO employe (id_employe, prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES ("+self.mid_employe+",\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mid_ville_employe+","+self.mtelephone_employe+",\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mid_grade_employe+","+self.mid_service_employe+");"
+			requete = "INSERT INTO employe (id_employe, prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES ("+self.mid_employe+",\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mville_employe.GetIdVille()+","+self.mtelephone_employe+",\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mid_grade_employe+","+self.mid_service_employe+");"
 			
 			if MysqlDef.executeRequete(connexion,requete) == False:
 				print "Modification(etape insertion) de l'employe: {0} {1}, a echoue".format(self.mprenom_employe, self.mnom_employe)
