@@ -40,17 +40,15 @@ class Ville():
 
 				else:
 					print "Insertion de la ville: {0}, a reussi".format(self.mlibelle_ville)
+					# Recuperation de l'id de la ville
+					requete = "SELECT id_ville FROM ville WHERE libelle_ville = \'"+self.mlibelle_ville+"\'"
+					result = MysqlDef.executeRequete(connexion,requete)
+					self.mid_ville = str(result.fetchall()[0][0])
+					return True
 	
 			else:
 				print "La ville {0} existe deja dans la table, ajout impossible".format(self.mlibelle_ville)
 				return False
-
-
-				# Recuperation de l'id de la ville
-				requete = "SELECT id_ville FROM ville WHERE libelle_ville = \'"+self.mlibelle_ville+"\'"
-				result = MysqlDef.executeRequete(connexion,requete)
-				self.mid_ville = result.fetchall()[0][0]
-				return True
 
 		# Sinon la ville existe deja alors on le modifie (on le supprimant d'abort puis on l'ajoutant)
 		else:
@@ -70,4 +68,8 @@ class Ville():
 
 			else:
 				print "Modification(etape insertion) de la ville: {0}, a reussi".format(self.mlibelle_ville)
+				# Recuperation de l'id de la ville
+				requete = "SELECT id_ville FROM ville WHERE libelle_ville = \'"+self.mlibelle_ville+"\'"
+				result = MysqlDef.executeRequete(connexion,requete)
+				self.mid_ville = str(result.fetchall()[0][0])
 				return True

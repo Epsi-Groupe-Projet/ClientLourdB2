@@ -161,17 +161,15 @@ class Employe():
 
 				else:
 					print "Insertion de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
+					# Recuperation de l'id de l'employe
+					requete = "SELECT id_employe FROM employe WHERE nom_employe = \'"+self.mnom_employe+"\' AND prenom_employe = \'"+self.mprenom_employe+"\'"
+					result = MysqlDef.executeRequete(connexion,requete)
+					self.mid_employe = str(result.fetchall()[0][0])
+					return True
 	
 			else:
 				print "L'employe {0} {1} existe deja dans la table ajout impossible".format(self.mprenom_employe,self.mnom_employe)
 				return False
-
-
-				# Recuperation de l'id de l'employe
-				requete = "SELECT id_employe FROM employe WHERE nom_employe = \'"+self.mnom_employe+"\' AND prenom_employe = \'"+self.mprenom_employe+"\'"
-				result = MysqlDef.executeRequete(connexion,requete)
-				self.mid_employe = result.fetchall()[0][0]
-				return True
 
 		# Sinon l'employe existe deja alors on le modifie (on le supprimant d'abort puis on l'ajoutant)
 		else:
@@ -191,4 +189,10 @@ class Employe():
 
 			else:
 				print "Modification(etape insertion) de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
+
+				# Recuperation de l'id de l'employe
+				requete = "SELECT id_employe FROM employe WHERE nom_employe = \'"+self.mnom_employe+"\' AND prenom_employe = \'"+self.mprenom_employe+"\'"
+				result = MysqlDef.executeRequete(connexion,requete)
+				self.mid_employe = str(result.fetchall()[0][0])
+
 				return True
