@@ -105,10 +105,10 @@ column_option = [id_option]
 libelle_option = ['libelle_option','VARCHAR(50)','NOT NULL']
 column_option.append(libelle_option)
 
-prix_option = ['prix_option','REEl','NOT NULL']
+prix_option = ['prix_option','DOUBLE','NOT NULL']
 column_option.append(prix_option)
 
-dico['option'] = column_option
+dico['option_voiture'] = column_option
 
 # Parametre table voiture
 id_voiture = ['id_voiture','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
@@ -123,19 +123,19 @@ column_voiture.append(carburant_voiture)
 prix_achat_hors_taxe_voiture =['prix_achat_hors_taxe_voiture','INT','NOT NULL']
 column_voiture.append(prix_achat_hors_taxe_voiture)
 
-prix_vente_hors_taxe_voiture =['prix_vente_hors_taxe_voiture','REEl','NOT NULL']
+prix_vente_hors_taxe_voiture =['prix_vente_hors_taxe_voiture','DOUBLE','NOT NULL']
 column_voiture.append(prix_vente_hors_taxe_voiture)
 
-id_modele_voiture = ['id_modele_voiture','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_modele_voiture = ['id_modele_voiture','INT','NOT NULL']
 column_voiture.append(id_modele_voiture )
 
-id_option_voiture = ['id_option_voiture','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_option_voiture = ['id_option_voiture','INT','NOT NULL']
 column_voiture.append(id_option_voiture )
 
 id_tva_voiture = ['id_tva_voiture','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
 column_voiture.append(id_tva_voiture )
 
-id_fournisseur_voiture = ['id_fournisseur_voiture','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_fournisseur_voiture = ['id_fournisseur_voiture','INT','NOT NULL']
 column_voiture.append(id_fournisseur_voiture)
 
 dico['voiture'] = column_voiture
@@ -143,9 +143,9 @@ dico['voiture'] = column_voiture
 
 # Parametre table TVA
 id_tva = ['id_tva','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
-column_tva = (id_tva)
+column_tva = [id_tva]
 
-taux_tva = ['taux_tva','REEl','NOT NULL']
+taux_tva = ['taux_tva','DOUBLE','NOT NULL']
 column_tva.append(taux_tva)
 
 date_tva = ['date_tva','DATE','NOT NULL']
@@ -155,61 +155,61 @@ dico['tva'] = column_tva
 
 # Parametre table facture client
 id_facture_client = ['id_facture_client','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
-column_facture_client = (id_facture_client)
+column_facture_client = [id_facture_client]
 
 date_facture_client = ['date_facture_client','DATE','NOT NULL']
 column_facture_client.append(date_facture_client)
 
-id_commande_client_facture_client = ['id_commande_client_facture_client','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_commande_client_facture_client = ['id_commande_client_facture_client','INT','NOT NULL']
 column_facture_client.append(id_commande_client_facture_client)
 
 dico['facture_client'] = column_facture_client
 
 # Parametre table commande client
 id_commande_client = ['id_commande_client','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
-column_commande_client = (id_commande_client)
+column_commande_client = [id_commande_client]
 
 date_commande_client = ['date_commande_client','DATE','NOT NULL']
 column_commande_client.append(date_commande_client)
 
-id_voiture_commade_client = ['id_voiture_commade_client','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_voiture_commade_client = ['id_voiture_commade_client','INT','NOT NULL']
 column_commande_client.append(id_voiture_commade_client)
 
-id_client_commande_client = ['id_client_commande_client','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_client_commande_client = ['id_client_commande_client','INT','NOT NULL']
 column_commande_client.append(id_client_commande_client)
 
 dico['commande_client'] = column_commande_client
 
 # Parametre table facture fournisseur
 id_facture_fournisseur = ['id_facture_fournisseur','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
-column_facture_fournisseur = (id_facture_fournisseur)
+column_facture_fournisseur = [id_facture_fournisseur]
 
 date_facture_fournisseur = ['date_facture_fournisseur','DATE','NOT NULL']
 column_facture_fournisseur.append(date_facture_fournisseur)
 
-id_commande_fournisseur_facture_fournisseur  = ['id_commande_fournisseur_facture_fournisseur ','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_commande_fournisseur_facture_fournisseur  = ['id_commande_fournisseur_facture_fournisseur ','INT','NOT NULL']
 column_facture_fournisseur.append(id_commande_fournisseur_facture_fournisseur)
 
 dico['facture_fournisseur'] = column_facture_fournisseur
 
 # Parametre table commande fournisseur
 id_commande_fournisseur = ['id_commande_fournisseur','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
-column_commande_fournisseur = (id_commande_fournisseur)
+column_commande_fournisseur = [id_commande_fournisseur]
 
 date_commande_fournisseur = ['date_commande_fournisseurt','DATE','NOT NULL']
 column_commande_fournisseur.append(date_commande_fournisseur)
 
-id_voiture_commande_fourniseur = ['id_voiture_commande_fourniseur','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_voiture_commande_fourniseur = ['id_voiture_commande_fourniseur','INT','NOT NULL']
 column_commande_fournisseur.append(id_voiture_commande_fourniseur)
 
-id_fournisseur_commande_fourniseur = ['id_fournisseur_commande_fourniseur','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_fournisseur_commande_fourniseur = ['id_fournisseur_commande_fourniseur','INT','NOT NULL']
 column_commande_fournisseur.append(id_fournisseur_commande_fourniseur)
 
 dico['commande_fournisseur'] = column_commande_fournisseur
 
 # Parametre table livraison
 id_livraison =['id_livraison','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT',]
-column_livraison = (id_livraison)
+column_livraison = [id_livraison]
 
 date_prevu_livraison = ['date_prevu_livraison','DATE','NOT NULL']
 column_livraison.append(date_prevu_livraison)
@@ -220,7 +220,7 @@ column_livraison.append(date_de_recuperation)
 observation_livraison = ['observation_livraison','VARCHAR(500)','NULL']
 column_livraison.append(observation_livraison)
 
-id_commande_fournisseur_livraison = ['id_commande_fournisseur_livraison','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
+id_commande_fournisseur_livraison = ['id_commande_fournisseur_livraison','INT','NOT NULL']
 column_livraison.append(id_commande_fournisseur_livraison)
 
 dico['livraison'] = column_livraison
