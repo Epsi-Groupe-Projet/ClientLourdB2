@@ -130,7 +130,7 @@ class Employe():
 		return self.mgrade_employe
 
 	# Procedure pour modifier le grade de l'employe
-	def SetIdGradeEmploye(self, pgrade_employe):
+	def SetGradeEmploye(self, pgrade_employe):
 		self.mgrade_employe = pgrade_employe
 
 	# Methode pour recuper le service  de l'employe
@@ -172,6 +172,10 @@ class Employe():
 	
 			else:
 				print "L'employe {0} {1} existe deja dans la table ajout impossible".format(self.mprenom_employe,self.mnom_employe)
+				# Recuperation de l'id de l'employe
+				requete = "SELECT id_employe FROM employe WHERE nom_employe = \'"+self.mnom_employe+"\' AND prenom_employe = \'"+self.mprenom_employe+"\'"
+				result = MysqlDef.executeRequete(connexion,requete)
+				self.mid_employe = str(result[0][0])
 				return False
 
 		# Sinon l'employe existe deja alors on le modifie (on le supprimant d'abort puis on l'ajoutant)
