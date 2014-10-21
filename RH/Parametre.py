@@ -45,7 +45,7 @@ id_service = ['id_service','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
 column_service = [id_service]
 libelle_service = ['libelle_service','VARCHAR(50)','NOT NULL']
 column_service.append(libelle_service)
-id_service_service = ['id_service_service','INT','NOT NULL']
+id_service_service = ['id_service_service','INT','NULL']
 column_service.append(id_service_service)
 
 dico['service'] = column_service
