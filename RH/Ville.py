@@ -30,7 +30,7 @@ class Ville():
 			result = MysqlDef.executeRequete(connexion,requete)
 
 			try:
-				result.fetchall()[0][0] is None
+				result[0][0] is None
 			except IndexError:
 				requete = "INSERT INTO ville (libelle_ville) VALUES (\'"+self.mlibelle_ville+"\')"
 				
@@ -43,11 +43,15 @@ class Ville():
 					# Recuperation de l'id de la ville
 					requete = "SELECT id_ville FROM ville WHERE libelle_ville = \'"+self.mlibelle_ville+"\'"
 					result = MysqlDef.executeRequete(connexion,requete)
-					self.mid_ville = str(result.fetchall()[0][0])
+					self.mid_ville = str(result[0][0])
 					return True
 	
 			else:
+				# Recuperation de l'id de la ville
 				print "La ville {0} existe deja dans la table, ajout impossible".format(self.mlibelle_ville)
+				requete = "SELECT id_ville FROM ville WHERE libelle_ville = \'"+self.mlibelle_ville+"\'"
+				result = MysqlDef.executeRequete(connexion,requete)
+				self.mid_ville = str(result[0][0])
 				return False
 
 		# Sinon la ville existe deja alors on le modifie (on le supprimant d'abort puis on l'ajoutant)
