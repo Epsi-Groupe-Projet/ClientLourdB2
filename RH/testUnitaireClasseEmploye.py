@@ -1,6 +1,8 @@
 import unittest
 import Employe
 import Ville
+import Grade
+import Service
 import Parametre
 import MysqlDef
 import ConnexionMysql
@@ -11,7 +13,9 @@ class TestClasseEmploye(unittest.TestCase):
 	def setUp(self):
     	#Initialisation des tests
 		self.villeEmploye = Ville.Ville('1','Marseille')
-		self.employeATester = Employe.Employe(None,'Yassine','Faris','1992-12-21','2500.5','19 rue Solle','','33200',self.villeEmploye,'0663362470','yass-faris@hotmail.fr','FAIL','Chef de service Informatique','2','1')
+		self.serviceEmploye = Service.Service('1','Informatique',None)
+		self.gradeEmploye = Grade.Grade('1','Chef de service')
+		self.employeATester = Employe.Employe(None,'Yassine','Faris','1992-12-21','2500.5','19 rue Solle','','33200',self.villeEmploye,'0663362470','yass-faris@hotmail.fr','FAIL','Chef de service Informatique',self.gradeEmploye,self.serviceEmploye)
 
 	# Test de la recuperation de l'id de l'employe
 	def test_GetIdEmploye(self):
@@ -125,23 +129,25 @@ class TestClasseEmploye(unittest.TestCase):
 		self.employeATester.SetPosteEmploye('Chef du departement Informatique')
 		self.assertEqual(self.employeATester.GetPosteEmploye(),'Chef du departement Informatique')
 
-	# Test de la recuperation de l'identifiant du grade de l'employe
-	def test_GetIdGradeEmploye(self):
-		self.assertEqual(self.employeATester.GetIdGradeEmploye(),'2')
+	# Test de la recuperation du grade de l'employe
+	def test_GetGradeEmploye(self):
+		self.assertEqual(self.employeATester.GetGradeEmploye(),self.gradeEmploye)
 
-	# Test de la modification de l'identifiant du grade de l'employe
-	def test_SetPosteEmploye(self):
-		self.employeATester.SetIdGradeEmploye('3')
-		self.assertEqual(self.employeATester.GetIdGradeEmploye(),'3')
+	# Test de la modification du grade de l'employe
+	def test_SetGradeEmploye(self):
+		gradeTest = Grade.Grade('2','Test')
+		self.employeATester.SetGradeEmploye(gradeTest)
+		self.assertEqual(self.employeATester.GetGradeEmploye(),gradeTest)
 
-	# Test de la recuperation de l'identifiant du service de l'employe
-	def test_GetIdServiceEmploye(self):
-		self.assertEqual(self.employeATester.GetIdServiceEmploye(),'1')
+	# Test de la recuperation du service de l'employe
+	def test_GetServiceEmploye(self):
+		self.assertEqual(self.employeATester.GetServiceEmploye(),self.serviceEmploye)
 
-	# Test de la modification de l'identifiant du service de l'employe
-	def test_SetIdServiceEmploye(self):
-		self.employeATester.SetIdServiceEmploye('6')
-		self.assertEqual(self.employeATester.GetIdServiceEmploye(),'6')
+	# Test de la modification du service de l'employe
+	def test_SetServiceEmploye(self):
+		serviceTest = Service.Service('2','Tst','5')
+		self.employeATester.SetServiceEmploye(serviceTest)
+		self.assertEqual(self.employeATester.GetServiceEmploye(),serviceTest)
 
 	# Test qui verifie le fonction de la methode EmployerIntoTable et d'une nouvelle insertion
 	def test_EmployerIntoTableNouveau(self):
