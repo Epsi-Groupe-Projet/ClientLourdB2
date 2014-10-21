@@ -156,7 +156,7 @@ class Employe():
 			try:
 				result[0][0] is None
 			except IndexError:
-				requete = "INSERT INTO employe (prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES (\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mville_employe.GetIdVille()+","+self.mtelephone_employe+",\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mgrade_employe.GetIdGrade()+","+self.mservice_employe.GetIdService()+");"
+				requete = "INSERT INTO employe (prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES (\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mville_employe.GetIdVille()+",\'"+self.mtelephone_employe+"\',\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mgrade_employe.GetIdGrade()+","+self.mservice_employe.GetIdService()+");"
 				
 				if MysqlDef.executeRequete(connexion,requete) == False:
 					print "Insertion de l'employe: {0} {1}, a echoue".format(self.mprenom_employe, self.mnom_employe)
@@ -188,7 +188,7 @@ class Employe():
 			else:
 				print "Modification(etape suppression) de l'employe: {0} {1}, a reussi".format(self.mprenom_employe, self.mnom_employe)
 
-			requete = "INSERT INTO employe (id_employe, prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES ("+self.mid_employe+",\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mville_employe.GetIdVille()+","+self.mtelephone_employe+",\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mgrade_employe.GetIdGrade()+","+self.mservice_employe.GetIdService()+");"
+			requete = "INSERT INTO employe (id_employe, prenom_employe, nom_employe, date_embauche_employe,salaire_employe,adresse_l1_employe,adresse_l2_employe,cp_employe,id_ville_employe,telephone_employe,	email_employe,commentaire_employe,poste_employe,id_grade_employe,id_service_employe) VALUES ("+self.mid_employe+",\'"+self.mprenom_employe+"\', \'"+self.mnom_employe+"\',\'"+self.mdate_embauche_employe+"\',"+self.msalaire_employe+",\'"+self.madresse_l1_employe+"\',\'"+self.madresse_l2_employe+"\',"+self.mcp_employe+","+self.mville_employe.GetIdVille()+",\'"+self.mtelephone_employe+"\',\'"+self.memail_employe+"\',\'"+self.mcommentaire_employe+"\',\'"+self.mposte_employe+"\',"+self.mgrade_employe.GetIdGrade()+","+self.mservice_employe.GetIdService()+");"
 			
 			if MysqlDef.executeRequete(connexion,requete) == False:
 				print "Modification(etape insertion) de l'employe: {0} {1}, a echoue".format(self.mprenom_employe, self.mnom_employe)
