@@ -31,7 +31,7 @@ def executeRequete(connexion,requete):
     finally:
 
         connexion.GetConnexion().commit()
-        return curseur
+        return curseur.fetchall()
 
 # Fonction qui test l'existance d'une bd puis la cree si elle n'existe pas
 
@@ -44,7 +44,7 @@ def existanceBd(connexion,nameBd):
 
         # Test de l'existance de la table puis creation sinon
 
-        if not result.fetchall() :
+        if not result :
 
             #suivi
 
@@ -76,7 +76,7 @@ def existanceTable(connexion, nameTable, columnTable):
 
         # Test de l'existance de la table puis creation sinon
 
-        if not result.fetchall() :
+        if not result:
 
             # Suivi
 
