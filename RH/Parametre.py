@@ -24,7 +24,7 @@ cp_employe = ['cp_employe','INT','NOT NULL']
 column_employe.append(cp_employe)
 id_ville_employe = ['id_ville_employe','INT','NOT NULL']
 column_employe.append(id_ville_employe)
-telephone_employe = ['telephone_employe','INT','NOT NULL']
+telephone_employe = ['telephone_employe','VARCHAR(20)','NOT NULL']
 column_employe.append(telephone_employe)
 email_employe = ['email_employe','VARCHAR(50)','NOT NULL']
 column_employe.append(email_employe)
