@@ -39,7 +39,7 @@ class TestClasseVille(unittest.TestCase):
 		result = MysqlDef.executeRequete(connexion,requete)
 		# s'attend a ce que les deux elements soient gaux. Sinon
 	    # le test echoue.
-		self.assertEqual(result.fetchall()[0][0],self.villeATester.GetLibelleVille())
+		self.assertEqual(result[0][0],self.villeATester.GetLibelleVille())
 
 		# Suppresion de la db test
 		requete = '''DROP DATABASE testDb'''
@@ -61,7 +61,7 @@ class TestClasseVille(unittest.TestCase):
 		result = MysqlDef.executeRequete(connexion,requete)
 		# s'attend a ce que les deux elements soient gaux. Sinon
 	    # le test echoue.
-		self.assertEqual(result.fetchall()[0][0],self.villeATester.GetLibelleVille())
+		self.assertEqual(result[0][0],self.villeATester.GetLibelleVille())
 
 		# Suppresion de la db test
 		requete = '''DROP DATABASE testDb'''

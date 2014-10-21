@@ -157,7 +157,7 @@ class TestClasseEmploye(unittest.TestCase):
 		result = MysqlDef.executeRequete(connexion,requete)
 		# s'attend a ce que les deux elements soient gaux. Sinon
 	    # le test echoue.
-		self.assertEqual(result.fetchall()[0][0],self.employeATester.GetPrenomEmploye())
+		self.assertEqual(result[0][0],self.employeATester.GetPrenomEmploye())
 
 		# Suppresion de la db test
 		requete = '''DROP DATABASE testDb'''
@@ -179,7 +179,7 @@ class TestClasseEmploye(unittest.TestCase):
 		result = MysqlDef.executeRequete(connexion,requete)
 		# s'attend a ce que les deux elements soient gaux. Sinon
 	    # le test echoue.
-		self.assertEqual(result.fetchall()[0][0],self.employeATester.GetNomEmploye())
+		self.assertEqual(result[0][0],self.employeATester.GetNomEmploye())
 
 		# Suppresion de la db test
 		requete = '''DROP DATABASE testDb'''
