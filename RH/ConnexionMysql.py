@@ -14,6 +14,7 @@ class ConnexionServeur():
 		self.muser = puser
 		self.mhost = phost
 		self.mpasswd = ppasswd
+		self.mdbname = None
 
 		#Connexion au serveur MYSQL
 		try: 
