@@ -31,7 +31,12 @@ def executeRequete(connexion,requete):
     finally:
 
         connexion.GetConnexion().commit()
-        return curseur.fetchall()
+        try:
+            tab = curseur.fetchall()
+        except MySQLdb.ProgrammingError:
+            return False
+        else:
+            return tab
 
 # Fonction qui test l'existance d'une bd puis la cree si elle n'existe pas
 
