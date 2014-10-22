@@ -73,3 +73,36 @@ class Ville():
 			else:
 				print "Modification(etape insertion) de la ville: {0}, a reussi".format(self.mlibelle_ville)
 				return True
+
+
+	# Methode pour recuperer une ville dans la table est fournir les donnees a l'objet ville
+
+	def GetVilleFromTableSQL(self,connexion,plist_column_name,plist_parametre):
+
+		if len(plist_column_name) != len(plist_parametre):
+			print 'Le nombre de nom de colonne et de parametre fournit est different: Impossible de recupere la ville'
+			return False
+
+		else:
+			# On cree la requete
+			requete = "SELECT * FROM ville WHERE "
+			i = 0
+			while i < len(plist_column_name):
+				requete = requete+plist_column_name[i]+" = \'"+plist_parametre[i]+"\' "
+				if i != len(plist_column_name) -1:
+					requete = requete + " AND "
+				i += 1
+
+
+		resultat = MysqlDef.executeRequete(connexion,requete)
+		
+		if resultat == False:
+			print 'Requperation de la ville impossible'
+			return False
+
+		else:
+			table = resultat
+			self.mid_ville = str(table[0][0])
+			self.mlibelle_ville = table[0][1]
+
+			print 'Recuperation de la ville reussi'

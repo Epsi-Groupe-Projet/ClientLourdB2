@@ -1,10 +1,10 @@
 import MysqlDef
 
 class Service():
-	def __init__(self,pid_service,plibelle_service,pid_service_service):
+	def __init__(self,pid_service,plibelle_service,pservice_service):
 		self.mid_service = pid_service
 		self.mlibelle_service = plibelle_service
-		self.mid_service_service = pid_service_service
+		self.mservice_service = pservice_service
 
 	# Accesseur Get pour l'id du service
 	def GetIdService(self):
@@ -23,8 +23,8 @@ class Service():
 		return self.mlibelle_service
 
 	# Accesseur Set pour l'id du service parent
-	def SetIdServiceService(self,pid_service_service):
-		self.mid_service_service = pid_service_service
+	def SetIdServiceService(self,pservice_service):
+		self.mid_service_service = pservice_service
 
 	# Methode pour ajouter ou modifier le service dans la table service
 	def ServiceIntoTable(self,connexion):
@@ -41,8 +41,8 @@ class Service():
 			try:
 				result[0][0] is None
 			except IndexError:
-				if self.mid_service_service is not None:
-					requete = "INSERT INTO service (libelle_service,id_service_service) VALUES (\'"+self.mlibelle_service+"\', "+self.mid_service_service+")"
+				if self.mservice_service is not None:
+					requete = "INSERT INTO service (libelle_service,id_service_service) VALUES (\'"+self.mlibelle_service+"\', "+self.mservice_service.GetIdService()+")"
 
 				else:
 					requete = "INSERT INTO service (libelle_service) VALUES (\'"+self.mlibelle_service+"\')"
@@ -53,8 +53,8 @@ class Service():
 				else:
 					print "Insertion du service: {0}, a reussi".format(self.mlibelle_service)
 					# Recuperation de l'id du service
-					if self.mid_service_service is not None:
-						requete = "SELECT id_service FROM service WHERE libelle_service = \'"+self.mlibelle_service+"\' AND id_service_service = "+self.mid_service_service
+					if self.mservice_service is not None:
+						requete = "SELECT id_service FROM service WHERE libelle_service = \'"+self.mlibelle_service+"\' AND id_service_service = "+self.mservice_service.GetIdService()
 
 					else:
 						requete = "SELECT id_service FROM service WHERE libelle_service = \'"+self.mlibelle_service+"\'"
@@ -72,7 +72,7 @@ class Service():
 
 		# Sinon le service existe deja alors on le modifie (on le supprimant d'abort puis on l'ajoutant)
 		else:
-			requete = "DELETE FROM service WHERE id_service = \'"+self.mid_service+"\' AND id_service_service = "+self.mid_service_service
+			requete = "DELETE FROM service WHERE id_service = \'"+self.mid_service+"\' AND id_service_service = "+self.mservice_service.GetIdService()
 			if MysqlDef.executeRequete(connexion,requete) == False:
 				print "Modififcation(etape suppression) du service: {0}, a echoue".format(self.mlibelle_service)
 				return False
@@ -80,8 +80,8 @@ class Service():
 			else:
 				print "Modification(etape suppression) du service: {0}, a reussi".format(self.mlibelle_service)
 
-			if self.mid_service_service is not None:
-				requete = "INSERT INTO service (id_service,libelle_service,id_service_service) VALUES ("+self.mid_service+",\'"+self.mlibelle_service+"\', "+self.mid_service_service+")"
+			if self.mservice_service is not None:
+				requete = "INSERT INTO service (id_service,libelle_service,id_service_service) VALUES ("+self.mid_service+",\'"+self.mlibelle_service+"\', "+self.mservice_service.GetIdService()+")"
 			
 			else:
 				requete = "INSERT INTO service (id_service,libelle_service) VALUES ("+self.mid_service+",\'"+self.mlibelle_service+"\')"
@@ -93,3 +93,41 @@ class Service():
 			else:
 				print "Modification(etape insertion) du service: {0}, a reussi".format(self.mlibelle_service)
 				return True
+
+	# Methode pour recuperer une service dans la table est fournir les donnees a l'objet service
+
+	def GetServiceFromTableSQL(self,connexion,plist_column_name,plist_parametre):
+
+		if len(plist_column_name) != len(plist_parametre):
+			print 'Le nombre de nom de colonne et de parametre fournit est different: Impossible de recupere la service'
+			return False
+
+		else:
+			# On cree la requete
+			requete = "SELECT * FROM service WHERE "
+			i = 0
+			while i < len(plist_column_name):
+				requete = requete+plist_column_name[i]+" = \'"+plist_parametre[i]+"\' "
+				if i != len(plist_column_name) -1:
+					requete = requete + " AND "
+				i += 1
+
+
+		resultat = MysqlDef.executeRequete(connexion,requete)
+		
+		if resultat == False:
+			print 'Requperation de la service impossible'
+			return False
+
+		else:
+			table = resultat
+			self.mid_service = str(table[0][0])
+			self.mlibelle_service = table[0][1]
+
+			# Recuperation du service mere
+			requeteServiceService = "SELECT id_service, libelle_service, id_service_service  FROM service WHERE id_service = "+str(table[0][2])
+			resultatService = MysqlDef.executeRequete(connexion,requeteServiceService)
+			self.mservice_service = Service(resultatService[0][0],resultatService[0][1],resultatService[0][2])
+
+			print 'Recuperation du service reussi'
+
