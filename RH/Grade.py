@@ -73,3 +73,35 @@ class Grade():
 			else:
 				print "Modification(etape insertion) du grade: {0}, a reussi".format(self.mlibelle_grade)
 				return True
+
+	# Methode pour recuperer un grade dans la table est fournir les donnees a l'objet grade
+
+	def GetGradeFromTableSQL(self,connexion,plist_column_name,plist_parametre):
+
+		if len(plist_column_name) != len(plist_parametre):
+			print 'Le nombre de nom de colonne et de parametre fournit est different: Impossible de recupere le grade'
+			return False
+
+		else:
+			# On cree la requete
+			requete = "SELECT * FROM grade WHERE "
+			i = 0
+			while i < len(plist_column_name):
+				requete = requete+plist_column_name[i]+" = \'"+plist_parametre[i]+"\' "
+				if i != len(plist_column_name) -1:
+					requete = requete + " AND "
+				i += 1
+
+
+		resultat = MysqlDef.executeRequete(connexion,requete)
+		
+		if resultat == False:
+			print 'Requperation du grade impossible'
+			return False
+
+		else:
+			table = resultat
+			self.mid_grade = str(table[0][0])
+			self.mlibelle_grade = table[0][1]
+
+			print 'Recuperation du grade reussi'
