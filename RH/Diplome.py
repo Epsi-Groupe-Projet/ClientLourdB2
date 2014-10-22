@@ -41,11 +41,9 @@ class Diplome():
 			try:
 				result[0][0] is None
 			except IndexError:
-				if self.mlevel_diplome is not None:
-					requete = "INSERT INTO diplome (libelle_diplome,level_diplome) VALUES (\'"+self.mlibelle_diplome+"\', "+self.mlevel_diplome+")"
 
-				else:
-					requete = "INSERT INTO diplome (libelle_diplome) VALUES (\'"+self.mlibelle_diplome+"\')"
+				requete = "INSERT INTO diplome (libelle_diplome,level_diplome) VALUES (\'"+self.mlibelle_diplome+"\', "+self.mlevel_diplome+")"
+
 				if MysqlDef.executeRequete(connexion,requete) == False:
 					print "Insertion du diplome: {0}, a echoue".format(self.mlibelle_diplome)
 					return False
@@ -53,11 +51,10 @@ class Diplome():
 				else:
 					print "Insertion du diplome: {0}, a reussi".format(self.mlibelle_diplome)
 					# Recuperation de l'id du diplome
-					if self.mlevel_diplome is not None:
-						requete = "SELECT id_diplome FROM diplome WHERE libelle_diplome = \'"+self.mlibelle_diplome+"\' AND level_diplome = "+self.mlevel_diplome
 
-					else:
-						requete = "SELECT id_diplome FROM diplome WHERE libelle_diplome = \'"+self.mlibelle_diplome+"\'"
+					requete = "SELECT id_diplome FROM diplome WHERE libelle_diplome = \'"+self.mlibelle_diplome+"\' AND level_diplome = "+self.mlevel_diplome
+
+
 
 					result = MysqlDef.executeRequete(connexion,requete)
 					self.mid_diplome = str(result[0][0])
@@ -80,11 +77,7 @@ class Diplome():
 			else:
 				print "Modification(etape suppression) du diplome: {0}, a reussi".format(self.mlibelle_diplome)
 
-			if self.mlevel_diplome is not None:
-				requete = "INSERT INTO diplome (id_diplome,libelle_diplome,level_diplome) VALUES ("+self.mid_diplome+",\'"+self.mlibelle_diplome+"\', "+self.mlevel_diplome+")"
-			
-			else:
-				requete = "INSERT INTO diplome (id_diplome,libelle_diplome) VALUES ("+self.mid_diplome+",\'"+self.mlibelle_diplome+"\')"
+			requete = "INSERT INTO diplome (id_diplome,libelle_diplome,level_diplome) VALUES ("+self.mid_diplome+",\'"+self.mlibelle_diplome+"\', "+self.mlevel_diplome+")"
 
 			if MysqlDef.executeRequete(connexion,requete) == False:
 				print "Modification(etape insertion) du diplome: {0}, a echoue".format(self.mlibelle_diplome)
