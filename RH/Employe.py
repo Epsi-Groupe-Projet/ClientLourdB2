@@ -227,10 +227,10 @@ class Employe():
 		else:
 			table = resultat
 			self.mid_employe = str(table[0][0])
-			self.pprenom_employe = table[0][1]
-			self.pnom_employe = table[0][2]
-			self.pdate_embauche_employe = str(table[0][3])
-			self.psalaire_employe = str(table[0][4])
+			self.mprenom_employe = table[0][1]
+			self.mnom_employe = table[0][2]
+			self.mdate_embauche_employe = str(table[0][3])
+			self.msalaire_employe = str(table[0][4])
 			self.madresse_l1_employe = table[0][5]
 			self.madresse_l2_employe = table[0][6]
 			self.mcp_employe = str(table[0][7])
@@ -242,15 +242,17 @@ class Employe():
 			# Recuperation de la ville
 			requeteVille = "SELECT id_ville, libelle_ville 	  FROM ville WHERE id_ville = "+str(table[0][8])
 			resultatVille = MysqlDef.executeRequete(connexion,requeteVille)
-			ville = Ville.Ville(resultatVille[0][0],resultatVille[0][1])
+			self.mville_employe = Ville.Ville(resultatVille[0][0],resultatVille[0][1])
 
 			# Recuperation du grade
 			requeteGrade = "SELECT id_grade, libelle_grade FROM grade WHERE id_grade = "+str(table[0][13])
 			resultatGrade = MysqlDef.executeRequete(connexion,requeteGrade)
-			grade = Grade.Grade(resultatGrade[0][0],resultatGrade[0][1])
+			self.mgrade_employe = Grade.Grade(resultatGrade[0][0],resultatGrade[0][1])
 
 			# Recuperation du service
 			requeteService = "SELECT id_service, libelle_service, id_service_service FROM service WHERE id_service = "+str(table[0][14])
 			resultatService = MysqlDef.executeRequete(connexion,requeteService)
-			service = Service.Service(resultatService[0][0],resultatService[0][1], resultatService[0][2])
+			self.mservice_employe = Service.Service(resultatService[0][0],resultatService[0][1], resultatService[0][2])
+
+			print 'Recuperation de l\'employe reussi'
 
