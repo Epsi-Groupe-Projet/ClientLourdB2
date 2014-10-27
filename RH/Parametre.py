@@ -1,9 +1,13 @@
+from Tkinter import *
+
 host = 'localhost'
 user = 'root'
 passwd = '00112233..y'
 dbname = 'prodRH'
+backGroundColor = 'white'
+fgColor = 'maroon'
 
-dico = {}
+dicoTable = {}
 
 # Parametre Table employe
 id_employe = ['id_employe','INT','NOT NULL','PRIMARY KEY','AUTO_INCREMENT']
@@ -37,7 +41,7 @@ column_employe.append(id_grade_employe)
 id_service_employe = ['id_service_employe','INT','NOT NULL']
 column_employe.append(id_service_employe)
 
-dico['employe'] = column_employe
+dicoTable['employe'] = column_employe
 
 # Parametre table service
 
@@ -48,7 +52,7 @@ column_service.append(libelle_service)
 id_service_service = ['id_service_service','INT','NULL']
 column_service.append(id_service_service)
 
-dico['service'] = column_service
+dicoTable['service'] = column_service
 
 # Parametre table ville
 
@@ -57,7 +61,7 @@ column_ville = [id_ville]
 libelle_ville = ['libelle_ville','VARCHAR(50)','NOT NULL']
 column_ville.append(libelle_ville)
 
-dico['ville'] = column_ville
+dicoTable['ville'] = column_ville
 
 # Parametre table grade
 
@@ -66,7 +70,7 @@ column_grade = [id_grade]
 libelle_grade = ['libelle_grade','VARCHAR(50)','NOT NULL']
 column_grade.append(libelle_grade)
 
-dico['grade'] = column_grade
+dicoTable['grade'] = column_grade
 
 # Parametre table diplome
 
@@ -77,7 +81,7 @@ column_diplome.append(libelle_diplome)
 level_diplome = ['level_diplome','INT','NOT NULL']
 column_diplome.append(level_diplome)
 
-dico['diplome'] = column_diplome
+dicoTable['diplome'] = column_diplome
 
 # Parametre table diplome_obtenu
 
@@ -88,4 +92,86 @@ column_diplome_obtenu.append(id_diplome_diplome_obtenu)
 id_employe_diplome_obtenu = ['id_employe_diplome_obtenu','INT','NOT NULL']
 column_diplome_obtenu.append(id_employe_diplome_obtenu)
 
-dico['diplome_obtenu'] = column_diplome_obtenu
+dicoTable['diplome_obtenu'] = column_diplome_obtenu
+
+
+dicoFenetre = {}
+
+# Page ajout employe
+
+FrameEmploye = ['Frame','Employe',None,2,GROOVE,5,5,LEFT]
+FenetreAjoutEmploye = [FrameEmploye]
+
+
+FrameNom = ['Frame','Nom','Employe',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameNom)
+LabetNom = ['Label','Nom','Nom','Nom de l\'employe',LEFT,5,5]
+FenetreAjoutEmploye.append(LabetNom)
+AjoutNom = ['Entry','Nom','Nom',LEFT,5,5]
+FenetreAjoutEmploye.append(AjoutNom)
+
+
+FramePrenom = ['Frame','Prenom','Employe',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FramePrenom)
+LabelPrenom = ['Label','Prenom','Prenom','Prenom de l\'employe',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelPrenom)
+EntryPrenom = ['Entry','Prenom','Prenom',LEFT,5,20]
+FenetreAjoutEmploye.append(EntryPrenom)
+
+
+FrameDateEmbauche = ['Frame','DateEmbauche','Employe',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameDateEmbauche)
+LabelDateEmbauche = ['Label','DateEmbauche','DateEmbauche','Date d\'embauche de l\'employe',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelDateEmbauche)
+
+FrameDateEmbaucheJour = ['Frame','DateEmbaucheJour','DateEmbauche',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameDateEmbaucheJour)
+LabelDateEmbaucheJour = ['Label','DateEmbaucheJour','DateEmbaucheJour','Jour',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelDateEmbaucheJour)
+EntryDateEmbaucheJour = ['Entry','DateEmbaucheJour','DateEmbaucheJour',LEFT,5,5]
+FenetreAjoutEmploye.append(EntryDateEmbaucheJour)
+
+FrameDateEmbaucheMois = ['Frame','DateEmbaucheMois','DateEmbauche',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameDateEmbaucheMois)
+LabelDateEmbaucheMois = ['Label','DateEmbaucheMois','DateEmbaucheMois','Mois',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelDateEmbaucheMois)
+EntryDateEmbaucheMois = ['Entry','DateEmbaucheMois','DateEmbaucheMois',LEFT,5,5]
+FenetreAjoutEmploye.append(EntryDateEmbaucheMois)
+
+FrameDateEmbaucheAnnee = ['Frame','DateEmbaucheAnnee','DateEmbauche',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameDateEmbaucheAnnee)
+LabelDateEmbaucheAnnee = ['Label','DateEmbaucheAnnee','DateEmbaucheAnnee','Annee',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelDateEmbaucheAnnee)
+EntryDateEmbaucheAnnee = ['Entry','DateEmbaucheAnee','DateEmbaucheAnnee',LEFT,5,5]
+FenetreAjoutEmploye.append(EntryDateEmbaucheAnnee)
+
+
+FrameSalaire = ['Frame','Salaire','Employe',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameSalaire)
+LabelSalaire = ['Label','Salaire','Salaire','Salaire de l\'employe',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelSalaire)
+EntrySalaire = ['Entry','Salaire','Salaire',LEFT,5,20]
+FenetreAjoutEmploye.append(EntrySalaire)
+
+FrameL1Adresse = ['Frame','L1Adresse','Employe',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameL1Adresse)
+LabelL1Adresse = ['Label','L1Adresse','L1Adresse','L1 Adresse de l\'employe',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelL1Adresse)
+EntryL1Adresse = ['Entry','L1Adresse','L1Adresse',LEFT,5,20]
+FenetreAjoutEmploye.append(EntryL1Adresse)
+
+FrameL2Adresse = ['Frame','L2Adresse','Employe',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameL2Adresse)
+LabelL2Adresse = ['Label','L2Adresse','L2Adresse','L2 Adresse de l\'employe',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelL2Adresse)
+EntryL2Adresse = ['Entry','L2Adresse','L2Adresse',LEFT,5,20]
+FenetreAjoutEmploye.append(EntryL2Adresse)
+
+FrameVille = ['Frame','Ville','Employe',2,GROOVE,5,5,TOP]
+FenetreAjoutEmploye.append(FrameVille)
+LabelVille = ['Label','Ville','Ville','Ville',LEFT,5,5]
+FenetreAjoutEmploye.append(LabelVille)
+ListDeroulandeVille = ['ListeDeroulante','ListeVille','Ville',LEFT,'readonly']
+FenetreAjoutEmploye.append(ListDeroulandeVille)
+
+dicoFenetre['Ajout d\'un employe'] = FenetreAjoutEmploye
