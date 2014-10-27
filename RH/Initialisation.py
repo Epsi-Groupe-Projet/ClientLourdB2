@@ -1,17 +1,17 @@
-import MySQLdb
-import Parametre
-import MysqlDef
-import ConnexionMysql
+from MySQLdb import *
+from Parametre import *
+from MysqlDef import *
+from ConnexionMysql import *
 
 def start():
 
 	# Connexion a la bd
-	connexion = ConnexionMysql.ConnexionServeur(Parametre.host,Parametre.user,Parametre.passwd)
+	connexion = ConnexionServeur(host,user,passwd)
 	# Test existance de la bd
-	MysqlDef.existanceBd(connexion,Parametre.dbname)
+	existanceBd(connexion,dbname)
 	# Test existance des tables
-	for nameTable in Parametre.dico.keys():
-		MysqlDef.existanceTable(connexion,nameTable,Parametre.dico[nameTable])
+	for nameTable in dicoTable.keys():
+		existanceTable(connexion,nameTable,dicoTable[nameTable])
 
 	return connexion
 
