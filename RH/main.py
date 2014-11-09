@@ -1,15 +1,13 @@
-from MySQLdb import *
-from Parametre import *
 from Initialisation import *
-from Employe import *
-from Ville import *
-from Service import *
-from Grade import *
-from Diplome import *
-from Diplome_Obtenu import *
 from Fenetre import *
 
 connexion = start()
 
-fenetre = Fenetre('Ajout d\'un employe',connexion)
+fenetre = Fenetre('Connexion',connexion)
+
+# Connexion de l'utilisateur
 fenetre.AfficherFenetre()
+while fenetre.GetResultatButton().GetConnexion() == None:
+	fenetre = Fenetre('ErreurConnexion',connexion)
+	fenetre.AfficherFenetre()
+	connexion = fenetre.GetResultatButton()
