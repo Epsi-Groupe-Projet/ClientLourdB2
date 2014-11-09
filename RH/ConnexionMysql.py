@@ -15,6 +15,7 @@ class ConnexionServeur():
 		self.mhost = phost
 		self.mpasswd = ppasswd
 		self.mdbname = None
+		self.mconnexion = None
 
 		#Connexion au serveur MYSQL
 		try: 
@@ -23,15 +24,18 @@ class ConnexionServeur():
 
 			# connexion 
 
-			self.connexion = MySQLdb.connect(self.mhost, self.muser, self.mpasswd) 
+			self.mconnexion = MySQLdb.connect(self.mhost, self.muser, self.mpasswd) 
 
 			# suivi 
 
 			print "Connexion a MySQL reussie sous l'identite host={0},user={1},passwd={2}".format(self.mhost,self.muser,self.mpasswd) 
 
-		except MySQLdb.OperationalError,message: 
-
+		except MySQLdb.OperationalError,message:
+			self.FailConnexion()
 			print "Erreur : {0}".format(message)
+
+
+			
 
 	def ConnexionBd(self,pdbname):
 
@@ -39,7 +43,7 @@ class ConnexionServeur():
 
 		#Connexion au serveur MYSQL + base de donnee
 
-		self.connexion.close()
+		self.mconnexion.close()
 
 		try: 
 
@@ -47,7 +51,7 @@ class ConnexionServeur():
 
 			# connexion 
 
-			self.connexion = MySQLdb.connect(self.mhost, self.muser, self.mpasswd, self.mdbname) 
+			self.mconnexion = MySQLdb.connect(self.mhost, self.muser, self.mpasswd, self.mdbname) 
 
 			# suivi 
 
@@ -58,11 +62,14 @@ class ConnexionServeur():
 			print "Erreur : {0}".format(message)
 
 	def GetConnexion(self):
-		if self.connexion is not None:
-			return self.connexion
+		return self.mconnexion
 
 	def Close(self):
-		self.connexion.close()
+		self.mconnexion.close()
 
 	def GetDbName(self):
 		return self.mdbname
+
+	def FailConnexion(self):
+		self.mconnexion = None
+		
