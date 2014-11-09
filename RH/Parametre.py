@@ -1,8 +1,9 @@
 from Tkinter import *
+from Function import *
 
 host = 'localhost'
 user = 'root'
-passwd = '00112233..y'
+passwd = 'root'
 dbname = 'prodRH'
 backGroundColor = 'white'
 fgColor = 'maroon'
@@ -97,6 +98,77 @@ dicoTable['diplome_obtenu'] = column_diplome_obtenu
 
 dicoFenetre = {}
 
+# Page de connexion
+
+FrameConnexion = ['Frame','Connexion',None,2,GROOVE,5,5,LEFT]
+FenetreConnexion = [FrameConnexion]
+
+
+FrameEntete = FrameEmploye = ['Frame','EnTete','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameEntete)
+LabelEntete = ['Label','Entete','EnTete','Veuillez entrer vos identifiants pour vous connectez.',LEFT,5,5]
+FenetreConnexion.append(LabelEntete)
+
+
+FrameIdentifiant = ['Frame','Identifiant','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameIdentifiant)
+LabelIdentifiant = ['Label','Identifiant','Identifiant','Identifiant',LEFT,5,5]
+FenetreConnexion.append(LabelIdentifiant)
+EntrerIdentifiant = ['Entry','Identifiant','Identifiant',None,LEFT,5,5]
+FenetreConnexion.append(EntrerIdentifiant)
+
+FrameMDP = ['Frame','MDP','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameMDP)
+LabelMDP = ['Label','MDP','MDP','Mot de passe',LEFT,5,5]
+FenetreConnexion.append(LabelMDP)
+EntrerMDP = ['Entry','MDP','MDP','*',LEFT,5,5]
+FenetreConnexion.append(EntrerMDP)
+
+FrameSeConnecter = ['Frame','SeConnecter','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameSeConnecter)
+ButtonSeConnecter = ['Button','SeConnecter','SeConnecter','Se Connecter',Connection,LEFT,5,5]
+FenetreConnexion.append(ButtonSeConnecter)
+
+dicoFenetre['Connexion'] = FenetreConnexion
+
+# Page d' Erreur Connexion
+
+FrameConnexion = ['Frame','Connexion',None,2,GROOVE,5,5,LEFT]
+FenetreConnexion = [FrameConnexion]
+
+
+FrameEntete = FrameEmploye = ['Frame','EnTete','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameEntete)
+LabelEntete = ['Label','Entete','EnTete','Veuillez entrer vos identifiants pour vous connectez.',LEFT,5,5]
+FenetreConnexion.append(LabelEntete)
+
+
+FrameIdentifiant = ['Frame','Identifiant','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameIdentifiant)
+LabelIdentifiant = ['Label','Identifiant','Identifiant','Identifiant',LEFT,5,5]
+FenetreConnexion.append(LabelIdentifiant)
+EntrerIdentifiant = ['Entry','Identifiant','Identifiant',None,LEFT,5,5]
+FenetreConnexion.append(EntrerIdentifiant)
+
+FrameMDP = ['Frame','MDP','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameMDP)
+LabelMDP = ['Label','MDP','MDP','Mot de passe',LEFT,5,5]
+FenetreConnexion.append(LabelMDP)
+EntrerMDP = ['Entry','MDP','MDP','*',LEFT,5,5]
+FenetreConnexion.append(EntrerMDP)
+
+FrameMessage = ['Frame','Message','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameMessage)
+LabelMessage = ['Label','Message','Message','Identifiant ou mot de passe errones.',LEFT,5,5]
+FenetreConnexion.append(LabelMessage)
+
+FrameSeConnecter = ['Frame','SeConnecter','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameSeConnecter)
+ButtonSeConnecter = ['Button','SeConnecter','SeConnecter','Se Connecter',Connection,LEFT,5,5]
+FenetreConnexion.append(ButtonSeConnecter)
+
+dicoFenetre['ErreurConnexion'] = FenetreConnexion
+
 # Page ajout employe
 
 FrameEmploye = ['Frame','Employe',None,2,GROOVE,5,5,LEFT]
@@ -107,7 +179,7 @@ FrameNom = ['Frame','Nom','Employe',2,GROOVE,5,5,TOP]
 FenetreAjoutEmploye.append(FrameNom)
 LabetNom = ['Label','Nom','Nom','Nom de l\'employe',LEFT,5,5]
 FenetreAjoutEmploye.append(LabetNom)
-AjoutNom = ['Entry','Nom','Nom',LEFT,5,5]
+AjoutNom = ['Entry','Nom','Nom',None,LEFT,5,5]
 FenetreAjoutEmploye.append(AjoutNom)
 
 
@@ -115,7 +187,7 @@ FramePrenom = ['Frame','Prenom','Employe',2,GROOVE,5,5,TOP]
 FenetreAjoutEmploye.append(FramePrenom)
 LabelPrenom = ['Label','Prenom','Prenom','Prenom de l\'employe',LEFT,5,5]
 FenetreAjoutEmploye.append(LabelPrenom)
-EntryPrenom = ['Entry','Prenom','Prenom',LEFT,5,20]
+EntryPrenom = ['Entry','Prenom','Prenom',None,LEFT,5,20]
 FenetreAjoutEmploye.append(EntryPrenom)
 
 
@@ -128,21 +200,21 @@ FrameDateEmbaucheJour = ['Frame','DateEmbaucheJour','DateEmbauche',2,GROOVE,5,5,
 FenetreAjoutEmploye.append(FrameDateEmbaucheJour)
 LabelDateEmbaucheJour = ['Label','DateEmbaucheJour','DateEmbaucheJour','Jour',LEFT,5,5]
 FenetreAjoutEmploye.append(LabelDateEmbaucheJour)
-EntryDateEmbaucheJour = ['Entry','DateEmbaucheJour','DateEmbaucheJour',LEFT,5,5]
+EntryDateEmbaucheJour = ['Entry','DateEmbaucheJour','DateEmbaucheJour',None,LEFT,5,5]
 FenetreAjoutEmploye.append(EntryDateEmbaucheJour)
 
 FrameDateEmbaucheMois = ['Frame','DateEmbaucheMois','DateEmbauche',2,GROOVE,5,5,TOP]
 FenetreAjoutEmploye.append(FrameDateEmbaucheMois)
 LabelDateEmbaucheMois = ['Label','DateEmbaucheMois','DateEmbaucheMois','Mois',LEFT,5,5]
 FenetreAjoutEmploye.append(LabelDateEmbaucheMois)
-EntryDateEmbaucheMois = ['Entry','DateEmbaucheMois','DateEmbaucheMois',LEFT,5,5]
+EntryDateEmbaucheMois = ['Entry','DateEmbaucheMois','DateEmbaucheMois',None,LEFT,5,5]
 FenetreAjoutEmploye.append(EntryDateEmbaucheMois)
 
 FrameDateEmbaucheAnnee = ['Frame','DateEmbaucheAnnee','DateEmbauche',2,GROOVE,5,5,TOP]
 FenetreAjoutEmploye.append(FrameDateEmbaucheAnnee)
 LabelDateEmbaucheAnnee = ['Label','DateEmbaucheAnnee','DateEmbaucheAnnee','Annee',LEFT,5,5]
 FenetreAjoutEmploye.append(LabelDateEmbaucheAnnee)
-EntryDateEmbaucheAnnee = ['Entry','DateEmbaucheAnee','DateEmbaucheAnnee',LEFT,5,5]
+EntryDateEmbaucheAnnee = ['Entry','DateEmbaucheAnee','DateEmbaucheAnnee',None,LEFT,5,5]
 FenetreAjoutEmploye.append(EntryDateEmbaucheAnnee)
 
 
@@ -150,21 +222,21 @@ FrameSalaire = ['Frame','Salaire','Employe',2,GROOVE,5,5,TOP]
 FenetreAjoutEmploye.append(FrameSalaire)
 LabelSalaire = ['Label','Salaire','Salaire','Salaire de l\'employe',LEFT,5,5]
 FenetreAjoutEmploye.append(LabelSalaire)
-EntrySalaire = ['Entry','Salaire','Salaire',LEFT,5,20]
+EntrySalaire = ['Entry','Salaire','Salaire',None,LEFT,5,20]
 FenetreAjoutEmploye.append(EntrySalaire)
 
 FrameL1Adresse = ['Frame','L1Adresse','Employe',2,GROOVE,5,5,TOP]
 FenetreAjoutEmploye.append(FrameL1Adresse)
 LabelL1Adresse = ['Label','L1Adresse','L1Adresse','L1 Adresse de l\'employe',LEFT,5,5]
 FenetreAjoutEmploye.append(LabelL1Adresse)
-EntryL1Adresse = ['Entry','L1Adresse','L1Adresse',LEFT,5,20]
+EntryL1Adresse = ['Entry','L1Adresse','L1Adresse',None,LEFT,5,20]
 FenetreAjoutEmploye.append(EntryL1Adresse)
 
 FrameL2Adresse = ['Frame','L2Adresse','Employe',2,GROOVE,5,5,TOP]
 FenetreAjoutEmploye.append(FrameL2Adresse)
 LabelL2Adresse = ['Label','L2Adresse','L2Adresse','L2 Adresse de l\'employe',LEFT,5,5]
 FenetreAjoutEmploye.append(LabelL2Adresse)
-EntryL2Adresse = ['Entry','L2Adresse','L2Adresse',LEFT,5,20]
+EntryL2Adresse = ['Entry','L2Adresse','L2Adresse',None,LEFT,5,20]
 FenetreAjoutEmploye.append(EntryL2Adresse)
 
 FrameVille = ['Frame','Ville','Employe',2,GROOVE,5,5,TOP]
