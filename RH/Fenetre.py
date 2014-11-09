@@ -14,9 +14,13 @@ class Fenetre():
 		self.mdicoLabel = {}
 		self.mdicoEntry = {}
 		self.mdicoList = {}
-		self.mresultat = []
+		self.mdicoButton = {}
 		self.mcompteurEntry = 0
-		for element in dicoFenetre[ptitle]:
+		self.listResultEntry = []
+		self.resultatButton = None
+
+
+		for element in dicoFenetre[self.mtitle]:
 			if element[0] == 'Frame':
 				if element[2] == None:
 					frameParent = self.mfenetre
@@ -36,8 +40,9 @@ class Fenetre():
 					frameParent = self.mfenetre
 				else:
 					frameParent = self.mdicoFrame[element[2]]
-				self.mresultat.append(None)
-				self.AjoutEntry(element[1],frameParent,self.mresultat[self.mcompteurEntry],element[3],element[4],element[5])
+				var = StringVar()
+				self.listResultEntry.append(var)
+				self.AjoutEntry(element[1],frameParent,self.listResultEntry[self.mcompteurEntry],element[3],element[4],element[5],element[6])
 				self.mcompteurEntry += 1
 
 			if element[0] == 'ListeDeroulante':
@@ -49,6 +54,14 @@ class Fenetre():
 				requete = "SELECT libelle_"+element[2].lower()+" FROM "+element[2].lower()
 				resultat = executeRequete(self.mconnexion,requete)
 				self.AjoutListeDeroulante(element[1],frameParent,self.mresultat[self.mcompteurEntry],resultat,element[3],element[4])
+
+			if element[0] == 'Button':
+				if element[2] == None:
+					frameParent = self.mfenetre
+				else:
+					frameParent = self.mdicoFrame[element[2]]
+				self.AjoutButton(element[1],frameParent,element[3],self.ExecuterFonction,element[5],element[6],element[7])
+				fichier = open('./'+element[1]+'res',"w")
 
 	def AfficherFenetre(self):
 		self.mfenetre.mainloop()
@@ -68,16 +81,29 @@ class Fenetre():
 		self.mdicoLabel[plibelle] = Label (pfather, text = ptext)
 		self.mdicoLabel[plibelle].pack(side = pside, padx = pdx, pady = pdy)	
 
-	def AjoutEntry(self,plibelle, pfather, ptextvariable, pside, pdx, pdy):
-		self.mdicoEntry['plibelle'] = Entry(pfather, textvariable = ptextvariable, bg = backGroundColor, fg = fgColor)
-		self.mdicoEntry['plibelle'].focus_set()
-		self.mdicoEntry['plibelle'].pack(side = pside, padx = pdx, pady = pdy)
+	def AjoutEntry(self,plibelle, pfather, ptextvariable,pshow, pside, pdx, pdy):
+		self.mdicoEntry[plibelle] = Entry(pfather, textvariable = ptextvariable,show = pshow, bg = backGroundColor, fg = fgColor)
+		self.mdicoEntry[plibelle].pack(side = pside, padx = pdx, pady = pdy)
 
 	def AjoutListeDeroulante(self,plibelle,pfather,ptextvariable, pliste,pside,pstate):
 		self.mdicoList[plibelle] = ttk.Combobox(pfather, textvariable = ptextvariable, values = pliste, state = pstate)
 		self.mdicoList[plibelle].pack(side = pside)
 
+	def AjoutButton(self,plibelle,pfather,ptext,pcommand,pside,pdx,pdy):
+		self.mdicoButton[plibelle] = Button(pfather,text = ptext, command = pcommand)
+		self.mdicoButton[plibelle].pack(side = pside,padx = pdx, pady = pdy)
+
+	def ExecuterFonction(self):
+		resultat = dicoFenetre[self.mtitle][len(dicoFenetre[self.mtitle])-1][4](self.listResultEntry)
+		if resultat != False:
+			self.resultatButton = resultat
+			self.Close()
+		else:
+			self.resultatButton = None
 
 
+	def GetResultatButton(self):
+		return self.resultatButton
 
-
+	def Close(self):
+		self.mfenetre.destroy()
