@@ -126,8 +126,13 @@ FenetreConnexion.append(EntrerMDP)
 
 FrameSeConnecter = ['Frame','SeConnecter','Connexion',2,GROOVE,5,5,TOP]
 FenetreConnexion.append(FrameSeConnecter)
-ButtonSeConnecter = ['Button','SeConnecter','SeConnecter','Se Connecter',Connection,LEFT,5,5]
+ButtonSeConnecter = ['Button','SeConnecter','SeConnecter','Se Connecter',Connection,LEFT,5,5,'Accueil']
 FenetreConnexion.append(ButtonSeConnecter)
+
+FrameImageTest = ['Frame','ImageTest','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameImageTest)
+ImageTest = ['Image','ImageTest','ImageTest','img/test.jpg']
+FenetreConnexion.append(ImageTest)
 
 dicoFenetre['Connexion'] = FenetreConnexion
 
@@ -137,7 +142,7 @@ FrameConnexion = ['Frame','Connexion',None,2,GROOVE,5,5,LEFT]
 FenetreConnexion = [FrameConnexion]
 
 
-FrameEntete = FrameEmploye = ['Frame','EnTete','Connexion',2,GROOVE,5,5,TOP]
+FrameEntete = ['Frame','EnTete','Connexion',2,GROOVE,5,5,TOP]
 FenetreConnexion.append(FrameEntete)
 LabelEntete = ['Label','Entete','EnTete','Veuillez entrer vos identifiants pour vous connectez.',LEFT,5,5]
 FenetreConnexion.append(LabelEntete)
@@ -164,11 +169,23 @@ FenetreConnexion.append(LabelMessage)
 
 FrameSeConnecter = ['Frame','SeConnecter','Connexion',2,GROOVE,5,5,TOP]
 FenetreConnexion.append(FrameSeConnecter)
-ButtonSeConnecter = ['Button','SeConnecter','SeConnecter','Se Connecter',Connection,LEFT,5,5]
+ButtonSeConnecter = ['Button','SeConnecter','SeConnecter','Se Connecter',Connection,LEFT,5,5,'Accueil']
 FenetreConnexion.append(ButtonSeConnecter)
 
 
 dicoFenetre['ErreurConnexion'] = FenetreConnexion
+
+# Page accueil
+
+FrameAccueil = ['Frame','Accueil',None,2,GROOVE,5,5,LEFT]
+FenetreAccueil = [FrameAccueil]
+
+FrameMessage = ['Frame','Message','Accueil',2,GROOVE,5,5,TOP]
+FenetreAccueil.append(FrameMessage)
+LabelMessage = ['Label','Message','Message','Bienvenue sur l\'accueil.',LEFT,5,5]
+FenetreAccueil.append(LabelMessage)
+
+dicoFenetre['Accueil'] = FenetreAccueil
 
 # Page ajout employe
 
