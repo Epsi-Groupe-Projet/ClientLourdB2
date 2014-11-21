@@ -1,6 +1,7 @@
 from Tkinter import *
 from Parametre import *
 from MysqlDef import *
+from PIL import Image, ImageTk
 import ttk
 
 class Fenetre():
@@ -15,6 +16,7 @@ class Fenetre():
 		self.mdicoEntry = {}
 		self.mdicoList = {}
 		self.mdicoButton = {}
+		self.mdicoImage = {}
 		self.mcompteurEntry = 0
 		self.listResultEntry = []
 		self.resultatButton = None
@@ -61,6 +63,13 @@ class Fenetre():
 				else:
 					frameParent = self.mdicoFrame[element[2]]
 				self.AjoutButton(element[1],frameParent,element[3],element[4],element[5],element[6],element[7])
+
+			if element[0] == 'Image':
+				if element[2] == None:
+					frameParent = self.mfenetre
+				else:
+					frameParent = self.mdicoFrame[element[2]]
+				self.AjoutImage(element[1],frameParent,element[3])
 				
 	def AfficherFenetre(self):
 		self.mfenetre.mainloop()
@@ -91,6 +100,12 @@ class Fenetre():
 	def AjoutButton(self,plibelle,pfather,ptext,pcommand,pside,pdx,pdy):
 		self.mdicoButton[plibelle] = Button(pfather,text = ptext, command = lambda: self.ExecuterFonction(pcommand))
 		self.mdicoButton[plibelle].pack(side = pside,padx = pdx, pady = pdy)
+
+	def AjoutImage(self,plibelle,pfather,ppath):
+		image = Image.open(ppath)
+		self.mdicoImage[plibelle] = ImageTk.PhotoImage(image)
+		zoneImage = Label(pfather, image = self.mdicoImage[plibelle])
+		zoneImage.pack()
 
 	def ExecuterFonction(self,function):
 		resultat = function(self.listResultEntry)
