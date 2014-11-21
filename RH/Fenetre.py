@@ -20,6 +20,7 @@ class Fenetre():
 		self.mcompteurEntry = 0
 		self.listResultEntry = []
 		self.resultatButton = None
+		self.mnextFenetre = None
 
 
 		for element in dicoFenetre[self.mtitle]:
@@ -62,7 +63,7 @@ class Fenetre():
 					frameParent = self.mfenetre
 				else:
 					frameParent = self.mdicoFrame[element[2]]
-				self.AjoutButton(element[1],frameParent,element[3],element[4],element[5],element[6],element[7])
+				self.AjoutButton(element[1],frameParent,element[3],element[4],element[5],element[6],element[7],element[8])
 
 			if element[0] == 'Image':
 				if element[2] == None:
@@ -97,8 +98,8 @@ class Fenetre():
 		self.mdicoList[plibelle] = ttk.Combobox(pfather, textvariable = ptextvariable, values = pliste, state = pstate)
 		self.mdicoList[plibelle].pack(side = pside)
 
-	def AjoutButton(self,plibelle,pfather,ptext,pcommand,pside,pdx,pdy):
-		self.mdicoButton[plibelle] = Button(pfather,text = ptext, command = lambda: self.ExecuterFonction(pcommand))
+	def AjoutButton(self,plibelle,pfather,ptext,pcommand,pside,pdx,pdy,pnextFenetre):
+		self.mdicoButton[plibelle] = Button(pfather,text = ptext, command = lambda: self.ExecuterFonction(pcommand,pnextFenetre))
 		self.mdicoButton[plibelle].pack(side = pside,padx = pdx, pady = pdy)
 
 	def AjoutImage(self,plibelle,pfather,ppath):
@@ -107,10 +108,11 @@ class Fenetre():
 		zoneImage = Label(pfather, image = self.mdicoImage[plibelle])
 		zoneImage.pack()
 
-	def ExecuterFonction(self,function):
+	def ExecuterFonction(self,function,pnextFenetre):
 		resultat = function(self.listResultEntry)
 		if resultat != False:
 			self.resultatButton = resultat
+			self.mnextFenetre = pnextFenetre
 			self.Close()
 		else:
 			self.resultatButton = None
@@ -118,6 +120,9 @@ class Fenetre():
 
 	def GetResultatButton(self):
 		return self.resultatButton
+
+	def GetNextFenetre(self):
+		return self.mnextFenetre
 
 	def Close(self):
 		self.mfenetre.destroy()
