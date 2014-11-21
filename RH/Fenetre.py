@@ -60,9 +60,8 @@ class Fenetre():
 					frameParent = self.mfenetre
 				else:
 					frameParent = self.mdicoFrame[element[2]]
-				self.AjoutButton(element[1],frameParent,element[3],self.ExecuterFonction,element[5],element[6],element[7])
-				fichier = open('./'+element[1]+'res',"w")
-
+				self.AjoutButton(element[1],frameParent,element[3],element[4],element[5],element[6],element[7])
+				
 	def AfficherFenetre(self):
 		self.mfenetre.mainloop()
 
@@ -90,11 +89,11 @@ class Fenetre():
 		self.mdicoList[plibelle].pack(side = pside)
 
 	def AjoutButton(self,plibelle,pfather,ptext,pcommand,pside,pdx,pdy):
-		self.mdicoButton[plibelle] = Button(pfather,text = ptext, command = pcommand)
+		self.mdicoButton[plibelle] = Button(pfather,text = ptext, command = lambda: self.ExecuterFonction(pcommand))
 		self.mdicoButton[plibelle].pack(side = pside,padx = pdx, pady = pdy)
 
-	def ExecuterFonction(self):
-		resultat = dicoFenetre[self.mtitle][len(dicoFenetre[self.mtitle])-1][4](self.listResultEntry)
+	def ExecuterFonction(self,function):
+		resultat = function(self.listResultEntry)
 		if resultat != False:
 			self.resultatButton = resultat
 			self.Close()
