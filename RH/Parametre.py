@@ -167,6 +167,7 @@ FenetreConnexion.append(FrameSeConnecter)
 ButtonSeConnecter = ['Button','SeConnecter','SeConnecter','Se Connecter',Connection,LEFT,5,5]
 FenetreConnexion.append(ButtonSeConnecter)
 
+
 dicoFenetre['ErreurConnexion'] = FenetreConnexion
 
 # Page ajout employe
