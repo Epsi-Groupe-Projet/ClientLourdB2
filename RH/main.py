@@ -11,3 +11,6 @@ while fenetre.GetResultatButton().GetConnexion() == None:
 	fenetre = Fenetre('ErreurConnexion',connexion)
 	fenetre.AfficherFenetre()
 	connexion = fenetre.GetResultatButton()
+
+fenetre = Fenetre(fenetre.GetNextFenetre(),connexion)
+fenetre.AfficherFenetre()
