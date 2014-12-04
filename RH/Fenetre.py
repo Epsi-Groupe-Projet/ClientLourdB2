@@ -2,10 +2,11 @@ from Tkinter import *
 from Parametre import *
 from MysqlDef import *
 from PIL import Image, ImageTk
+import Function
 import ttk
 
 class Fenetre():
-	def __init__(self,ptitle,pconnexion):
+	def __init__(self,ptitle,pconnexion,pprecedentResult):
 		self.mfenetre = Tk()
 		self.mconnexion = pconnexion
 		self.mtitle = ptitle
@@ -18,7 +19,9 @@ class Fenetre():
 		self.mdicoButton = {}
 		self.mdicoImage = {}
 		self.mcompteurEntry = 0
-		self.listResultEntry = []
+		self.mdicoResult = {}
+		self.mprecedentResult = pprecedentResult
+		self.mdicoResult['listResultEntry'] = []
 		self.resultatButton = None
 		self.mnextFenetre = None
 
@@ -36,6 +39,9 @@ class Fenetre():
 					frameParent = self.mfenetre
 				else:
 					frameParent = self.mdicoFrame[element[2]]
+
+				if element[3] == '#Selected#':
+					element[3] = self.mprecedentResult['selectedButton']
 				self.AjoutLabel(element[1],frameParent,element[3],element[4],element[5],element[6])
 
 			if element[0] == 'Entry':
@@ -44,8 +50,8 @@ class Fenetre():
 				else:
 					frameParent = self.mdicoFrame[element[2]]
 				var = StringVar()
-				self.listResultEntry.append(var)
-				self.AjoutEntry(element[1],frameParent,self.listResultEntry[self.mcompteurEntry],element[3],element[4],element[5],element[6])
+				self.mdicoResult['listResultEntry'].append(var)
+				self.AjoutEntry(element[1],frameParent,self.mdicoResult['listResultEntry'][self.mcompteurEntry],element[3],element[4],element[5],element[6])
 				self.mcompteurEntry += 1
 
 			if element[0] == 'ListeDeroulante':
@@ -53,10 +59,22 @@ class Fenetre():
 					frameParent = self.mfenetre
 				else:
 					frameParent = self.mdicoFrame[element[2]]
-				self.mresultat.append(None)
+				self.mdicoResult['listResultEntry'].append(None)
 				requete = "SELECT libelle_"+element[2].lower()+" FROM "+element[2].lower()
 				resultat = executeRequete(self.mconnexion,requete)
-				self.AjoutListeDeroulante(element[1],frameParent,self.mresultat[self.mcompteurEntry],resultat,element[3],element[4])
+				self.AjoutListeDeroulante(element[1],frameParent,self.mdicoResult['listResultEntry'][self.mcompteurEntry],resultat,element[3],element[4])
+
+			if element[0] == 'ListeDynamiqueButton':
+				if element[2] == None:
+					frameParent = self.mfenetre
+				else:
+					frameParent = self.mdicoFrame[element[2]]
+				requete = "SELECT " + element[3] + " FROM " + element[4]
+				if element[5] != None:
+					requete += " WHERE id_" + element[4] + "_"+ element[4] + " IS " + element[5]
+				resultats = executeRequete(self.mconnexion,requete)
+				for resultat in resultats:
+					self.AjoutButton(element[1]+";"+resultat[0],frameParent,resultat[0],Function.FonctionQuiFoutRien,TOP,5,5,element[6])
 
 			if element[0] == 'Button':
 				if element[2] == None:
@@ -99,7 +117,7 @@ class Fenetre():
 		self.mdicoList[plibelle].pack(side = pside)
 
 	def AjoutButton(self,plibelle,pfather,ptext,pcommand,pside,pdx,pdy,pnextFenetre):
-		self.mdicoButton[plibelle] = Button(pfather,text = ptext, command = lambda: self.ExecuterFonction(pcommand,pnextFenetre))
+		self.mdicoButton[plibelle] = Button(pfather,text = ptext, command = lambda: self.ExecuterFonction(pcommand,pnextFenetre,ptext))
 		self.mdicoButton[plibelle].pack(side = pside,padx = pdx, pady = pdy)
 
 	def AjoutImage(self,plibelle,pfather,ppath):
@@ -108,11 +126,12 @@ class Fenetre():
 		zoneImage = Label(pfather, image = self.mdicoImage[plibelle])
 		zoneImage.pack()
 
-	def ExecuterFonction(self,function,pnextFenetre):
-		resultat = function(self.listResultEntry)
+	def ExecuterFonction(self,function,pnextFenetre,pselectedButton):
+		resultat = function(self.mdicoResult)
 		if resultat != False:
 			self.resultatButton = resultat
 			self.mnextFenetre = pnextFenetre
+			self.mdicoResult['selectedButton'] = pselectedButton
 			self.Close()
 		else:
 			self.resultatButton = None
@@ -120,6 +139,9 @@ class Fenetre():
 
 	def GetResultatButton(self):
 		return self.resultatButton
+
+	def GetDicoResult(self):
+		return self.mdicoResult
 
 	def GetNextFenetre(self):
 		return self.mnextFenetre
