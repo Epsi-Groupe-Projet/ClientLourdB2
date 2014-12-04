@@ -185,7 +185,32 @@ FenetreAccueil.append(FrameMessage)
 LabelMessage = ['Label','Message','Message','Bienvenue sur l\'accueil.',LEFT,5,5]
 FenetreAccueil.append(LabelMessage)
 
+FrameDepartement = ['Frame','Departement','Accueil',2,GROOVE,5,5,TOP]
+FenetreAccueil.append(FrameDepartement)
+ListeDynamiqueButtonDepartement = ['ListeDynamiqueButton','Departement','Departement','libelle_service','service','Null','Service']
+FenetreAccueil.append(ListeDynamiqueButtonDepartement)
+ButtonAjouterUnDepartement = ['Button','Departement','Departement','Ajouter un departement',FonctionQuiFoutRien,TOP,5,5,'Departement']
+FenetreAccueil.append(ButtonAjouterUnDepartement)
+
+FrameEmploye = ['Frame','Employe','Accueil',2,GROOVE,5,5,TOP]
+FenetreAccueil.append(FrameEmploye)
+ButtonRecrutement = ['Button','Recrutement','Employe','Recrutement',FonctionQuiFoutRien,TOP,5,5,'AjouterUnEmploye']
+FenetreAccueil.append(ButtonRecrutement)
+
 dicoFenetre['Accueil'] = FenetreAccueil
+
+# Page service
+
+FrameService = ['Frame','Service',None,2,GROOVE,5,5,LEFT]
+FenetreServiceSelec = [FrameService]
+
+FrameServiceSelec = ['Frame','ServiceSelec','Service',2,GROOVE,5,5,TOP]
+FenetreServiceSelec.append(FrameServiceSelec)
+LabelServiceSelect = ['Label','ServiceSelec','ServiceSelec','#Selected#',LEFT,5,5]
+FenetreServiceSelec.append(LabelServiceSelect)
+
+
+dicoFenetre['Service'] = FenetreServiceSelec
 
 # Page ajout employe
 
