@@ -8,6 +8,19 @@ import ttk
 class Fenetre():
 	def __init__(self,ptitle,pconnexion,pprecedentResult):
 		self.mfenetre = Tk()
+		#taille souhaite de la fenetre
+		w = 400
+		h = 400
+		#pour centrer la fenetre
+		#taille de l'ecran
+		ws = self.mfenetre.winfo_screenwidth()
+		hs = self.mfenetre.winfo_screenheight()
+		#calcul la position de la fenetre
+		x = (ws/2) - (w/2)
+		y = (hs/2) - (h/2)
+		#applique la position
+		self.mfenetre.geometry("+%d+%d" % (x, y))
+
 		self.mconnexion = pconnexion
 		self.mtitle = ptitle
 		self.mfenetre.title(self.mtitle)
@@ -71,6 +84,8 @@ class Fenetre():
 					frameParent = self.mdicoFrame[element[2]]
 				requete = "SELECT " + element[3] + " FROM " + element[4]
 				if element[5] != None:
+					if element[5] == '#SelectedButton#':
+						element[5] = self.mprecedentResult['selectedButton']
 					requete += " WHERE id_" + element[4] + "_"+ element[4] + " IS " + element[5]
 				resultats = executeRequete(self.mconnexion,requete)
 				for resultat in resultats:
@@ -127,7 +142,7 @@ class Fenetre():
 		zoneImage.pack()
 
 	def ExecuterFonction(self,function,pnextFenetre,pselectedButton):
-		resultat = function(self.mdicoResult)
+		resultat = function(self.mdicoResult,self.mconnexion)
 		if resultat != False:
 			self.resultatButton = resultat
 			self.mnextFenetre = pnextFenetre
