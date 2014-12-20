@@ -131,7 +131,7 @@ FenetreConnexion.append(ButtonSeConnecter)
 
 FrameImageTest = ['Frame','ImageTest','Connexion',2,GROOVE,5,5,TOP]
 FenetreConnexion.append(FrameImageTest)
-ImageTest = ['Image','ImageTest','ImageTest','img/test.jpg']
+ImageTest = ['Image','ImageTest','ImageTest','img/Moscovitch_logo.png']
 FenetreConnexion.append(ImageTest)
 
 dicoFenetre['Connexion'] = FenetreConnexion
@@ -164,13 +164,18 @@ FenetreConnexion.append(EntrerMDP)
 
 FrameMessage = ['Frame','Message','Connexion',2,GROOVE,5,5,TOP]
 FenetreConnexion.append(FrameMessage)
-LabelMessage = ['Label','Message','Message','Identifiant ou mot de passe errones.',LEFT,5,5]
+LabelMessage = ['Label','Message','Message','Identifiant ou mot de passe errone.',LEFT,5,5]
 FenetreConnexion.append(LabelMessage)
 
 FrameSeConnecter = ['Frame','SeConnecter','Connexion',2,GROOVE,5,5,TOP]
 FenetreConnexion.append(FrameSeConnecter)
 ButtonSeConnecter = ['Button','SeConnecter','SeConnecter','Se Connecter',Connection,LEFT,5,5,'Accueil']
 FenetreConnexion.append(ButtonSeConnecter)
+
+FrameImageTest = ['Frame','ImageTest','Connexion',2,GROOVE,5,5,TOP]
+FenetreConnexion.append(FrameImageTest)
+ImageTest = ['Image','ImageTest','ImageTest','img/Moscovitch_logo.png']
+FenetreConnexion.append(ImageTest)
 
 
 dicoFenetre['ErreurConnexion'] = FenetreConnexion
@@ -189,7 +194,7 @@ FrameDepartement = ['Frame','Departement','Accueil',2,GROOVE,5,5,TOP]
 FenetreAccueil.append(FrameDepartement)
 ListeDynamiqueButtonDepartement = ['ListeDynamiqueButton','Departement','Departement','libelle_service','service','Null','Service']
 FenetreAccueil.append(ListeDynamiqueButtonDepartement)
-ButtonAjouterUnDepartement = ['Button','Departement','Departement','Ajouter un departement',FonctionQuiFoutRien,TOP,5,5,'Departement']
+ButtonAjouterUnDepartement = ['Button','Departement','Departement','Ajouter un departement',FonctionQuiFoutRien,TOP,5,5,'AjouterUnDepartement']
 FenetreAccueil.append(ButtonAjouterUnDepartement)
 
 FrameEmploye = ['Frame','Employe','Accueil',2,GROOVE,5,5,TOP]
@@ -204,13 +209,41 @@ dicoFenetre['Accueil'] = FenetreAccueil
 FrameService = ['Frame','Service',None,2,GROOVE,5,5,LEFT]
 FenetreServiceSelec = [FrameService]
 
+FrameDepartementSelec = ['Frame','DepartementSelec','Service',2,GROOVE,5,5,TOP]
+FenetreServiceSelec.append(FrameDepartementSelec)
+LabelDepartementSelec = ['Label','DepartementSelec','DepartementSelec','#Selected#',LEFT,5,5]
+FenetreServiceSelec.append(LabelDepartementSelec)
+
 FrameServiceSelec = ['Frame','ServiceSelec','Service',2,GROOVE,5,5,TOP]
 FenetreServiceSelec.append(FrameServiceSelec)
-LabelServiceSelect = ['Label','ServiceSelec','ServiceSelec','#Selected#',LEFT,5,5]
-FenetreServiceSelec.append(LabelServiceSelect)
-
+ListeDynamiqueButtonServiceSelec = ['ListeDynamiqueButton','ServiceSelec','ServiceSelec','libelle_service','service','#SelectedButton#','Service']
+FenetreServiceSelec.append(ListeDynamiqueButtonServiceSelec)
 
 dicoFenetre['Service'] = FenetreServiceSelec
+
+# Page Ajouter un Departement
+
+FrameDepartement = ['Frame','Departement',None,2,GROOVE,5,5,LEFT]
+FenetreAjouterDepartement = [FrameDepartement]
+
+FrameTitreDepartement = ['Frame','TitreDepartement','Departement',2,GROOVE,5,5,TOP]
+FenetreAjouterDepartement.append(FrameTitreDepartement)
+LabelTitreDepartement = ['Label','TitreDepartement','TitreDepartement','Ajouter un departement',TOP,5,5]
+FenetreAjouterDepartement.append(LabelTitreDepartement)
+
+FrameNomDepartement = ['Frame','NomDepartement','Departement',2,GROOVE,5,5,TOP]
+FenetreAjouterDepartement.append(FrameNomDepartement)
+LabelNomDepartement = ['Label','NomDepartement','NomDepartement','LibelleDepartement',LEFT,5,5]
+FenetreAjouterDepartement.append(LabelNomDepartement)
+EntrerNomDepartement= ['Entry','NomDepartement','NomDepartement',None,LEFT,5,5]
+FenetreAjouterDepartement.append(EntrerNomDepartement)
+
+FrameButtonDepartement = ['Frame','ButtonDepartement','Departement',2,GROOVE,5,5,TOP]
+FenetreAjouterDepartement.append(FrameButtonDepartement)
+ButtonAjouterDepartement = ['Button','AjouterDepartement','ButtonDepartement','Ajouter un departement',AjouterUnDepartement,TOP,5,5,'Accueil']
+FenetreAjouterDepartement.append(ButtonAjouterDepartement)
+
+dicoFenetre['AjouterUnDepartement'] = FenetreAjouterDepartement
 
 # Page ajout employe
 

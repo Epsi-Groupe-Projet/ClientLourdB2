@@ -11,11 +11,11 @@ while fenetre.GetResultatButton().GetConnexion() == None:
 	fenetre = Fenetre('ErreurConnexion',connexion,None)
 	fenetre.AfficherFenetre()
 
-ResultatPrecedent = fenetre.GetDicoResult()
+# Boucle
+boucle = 1
 
-fenetre = Fenetre(fenetre.GetNextFenetre(),connexion,ResultatPrecedent)
-fenetre.AfficherFenetre()
+while boucle:
+	ResultatPrecedent = fenetre.GetDicoResult()
 
-ResultatPrecedent = fenetre.GetDicoResult()
-fenetre = Fenetre(fenetre.GetNextFenetre(),connexion,ResultatPrecedent)
-fenetre.AfficherFenetre()
+	fenetre = Fenetre(fenetre.GetNextFenetre(),connexion,ResultatPrecedent)
+	fenetre.AfficherFenetre()
