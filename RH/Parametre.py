@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 from Tkinter import *
 from Function import *
 
@@ -95,6 +97,12 @@ column_diplome_obtenu.append(id_employe_diplome_obtenu)
 
 dicoTable['diplome_obtenu'] = column_diplome_obtenu
 
+# Parametre table TypeFenetre
+
+libelle_type_fenetre = ['libelle_type_fenetre','VARCHAR(50)','NOT NULL']
+column_type_fenetre = [libelle_type_fenetre]
+
+dicoTable['type_fenetre'] = column_type_fenetre
 
 dicoFenetre = {}
 
@@ -319,7 +327,90 @@ FrameVille = ['Frame','Ville','Employe',2,GROOVE,5,5,TOP]
 FenetreAjoutEmploye.append(FrameVille)
 LabelVille = ['Label','Ville','Ville','Ville',LEFT,5,5]
 FenetreAjoutEmploye.append(LabelVille)
-ListDeroulandeVille = ['ListeDeroulante','ListeVille','Ville',LEFT,'readonly']
+ListDeroulandeVille = ['ListeDeroulante','ListeVille','ListeVille','libelle_Ville',LEFT,'readonly']
 FenetreAjoutEmploye.append(ListDeroulandeVille)
 
 dicoFenetre['Ajout d\'un employe'] = FenetreAjoutEmploye
+
+# Page d'ajout de Fenetre (Etape Nom Fenetre)
+
+FrameGestionDeFenetre = ['Frame','GestionDeFenetre',None,2,GROOVE,5,5,LEFT]
+FenetreGestionDeFenetre = [FrameGestionDeFenetre]
+
+FrameChoix = ['Frame','FrameChoix','GestionDeFenetre',2,GROOVE,5,5,TOP]
+FenetreGestionDeFenetre.append(FrameChoix)
+ButtonCreationDeFenetre = ['Button','CreationDeFenetre','FrameChoix','Ajouter une fenetre',FonctionQuiFoutRien,TOP,5,5,'FenetreCreationDeFenetre']
+FenetreGestionDeFenetre.append(ButtonCreationDeFenetre)
+ButtonModificationDeFenetre = ['Button','ModificationDeFenetre','FrameChoix','Modification De Fenetre',FonctionQuiFoutRien,TOP,5,5,'Accueil']
+FenetreGestionDeFenetre.append(ButtonModificationDeFenetre)
+ButtonSuppressionDeFenetre = ['Button','SuppressionDeFenetre','FrameChoix','Suppression De Fenetre',FonctionQuiFoutRien,TOP,5,5,'Accueil']
+FenetreGestionDeFenetre.append(ButtonSuppressionDeFenetre)
+
+
+dicoFenetre['GestionDeFenetre'] = FenetreGestionDeFenetre
+
+# Page Création fenetre
+FrameCreationFenetre = ['Frame','CreationDeFenetre',None,2,GROOVE,5,5,LEFT]
+FenetreCreationDeFenetre = [FrameCreationFenetre]
+
+FrameChoixNom = ['Frame','ChoixNom','CreationDeFenetre',2,GROOVE,5,5,TOP]
+FenetreCreationDeFenetre.append(FrameChoixNom)
+LabeChoixNom = ['Label','ChoixNom','ChoixNom','Nom fenetre',LEFT,5,5]
+FenetreCreationDeFenetre.append(LabeChoixNom)
+EntryChoixNom = ['Entry','ChoixNom','ChoixNom',None,LEFT,5,20]
+FenetreCreationDeFenetre.append(EntryChoixNom)
+
+FrameDescription = ['Frame','Description','CreationDeFenetre',2,GROOVE,5,5,TOP]
+FenetreCreationDeFenetre.append(FrameDescription)
+LabelDescription = ['Label','Description','Description','Description fenetre',LEFT,5,5]
+FenetreCreationDeFenetre.append(LabelDescription)
+EntryDescription = ['Entry','Description','Description',None,LEFT,5,20]
+FenetreCreationDeFenetre.append(EntryDescription)
+
+ButtonEtape1CreationFenetre = ['Button','Etape1CreationFenetre','CreationDeFenetre','Commencer la création de la fenetre',Etape1CreationFenetre,TOP,5,5,'AjouterUnElement1']
+FenetreCreationDeFenetre.append(ButtonEtape1CreationFenetre)
+
+dicoFenetre['FenetreCreationDeFenetre'] = FenetreCreationDeFenetre
+
+# Page d'ajout d'un element à une fenetre etape 1
+FrameAjouterUnElement = ['Frame','AjouterUnElement1',None,2,GROOVE,5,5,LEFT]
+FenetreAjouterUnElement1 = [FrameAjouterUnElement]
+
+FrameTypeElelement = ['Frame','TypeElelement','AjouterUnElement1',2,GROOVE,5,5,TOP]
+FenetreAjouterUnElement1.append(FrameTypeElelement)
+LabeTypeElelement = ['Label','TypeElelement','TypeElelement','Type element',LEFT,5,5]
+FenetreAjouterUnElement1.append(LabeTypeElelement)
+ListDeroulandeTypeElelement = ['ListeDeroulante','TypeElelement','libelle_TypeElelement','p_TypeElelement',LEFT,'readonly']
+FenetreAjouterUnElement1.append(ListDeroulandeTypeElelement)
+
+ButtonTypeElelement = ['Button','TypeElelement','AjouterUnElement1','Choix type element',Exit,TOP,5,5,'Exit']
+FenetreAjouterUnElement1.append(ButtonTypeElelement)
+
+dicoFenetre['AjouterUnElement1'] = FenetreAjouterUnElement1
+
+# Formulaire pour un element de type frame
+FrameFormualireFrame = ['Frame','FormualireFrame',None,2,GROOVE,5,5,LEFT]
+FenetreFormualireFrame = [FrameFormualireFrame]
+
+FrameInfoFrame = ['Frame','InfoFrame','FormualireFrame',2,GROOVE,5,5,LEFT]
+FenetreFormualireFrame.append(FrameInfoFrame)
+
+LabelNomFrame = ['Label','NomFrame','InfoFrame','Nom du frame',TOP,5,5]
+FenetreFormualireFrame.append(LabelNomFrame)
+EntryNomFrame = ['Entry','NomFrame','InfoFrame',None,TOP,5,20]
+FenetreFormualireFrame.append(EntryNomFrame)
+
+LabelNomFrameParent = ['Label','NomFrameParent','InfoFrame','Nom du frame parent',TOP,5,5]
+FenetreFormualireFrame.append(LabelNomFrameParent)
+EntryNomFrameParent = ['Entry','NomFrameParent','InfoFrame',None,TOP,5,20]
+FenetreFormualireFrame.append(EntryNomFrameParent)
+
+LabelPositionement = ['Label','Positionement','InfoFrame','Positionement du frame',TOP,5,5]
+FenetreFormualireFrame.append(LabelPositionement)
+EntryPositionement = ['Entry','Positionement','InfoFrame',None,TOP,5,20]
+FenetreFormualireFrame.append(EntryPositionement)
+
+ButtonValider = ['Button','Valider','InfoFrame','Valider',Exit,TOP,5,5,'Exit']
+FenetreFormualireFrame.append(ButtonValider)
+
+dicoFenetre['Frame'] = FenetreFormualireFrame
