@@ -68,14 +68,16 @@ class Fenetre():
 				self.mcompteurEntry += 1
 
 			if element[0] == 'ListeDeroulante':
-				if element[2] == None:
+				if element[1] == None:
 					frameParent = self.mfenetre
 				else:
-					frameParent = self.mdicoFrame[element[2]]
-				self.mdicoResult['listResultEntry'].append(None)
-				requete = "SELECT libelle_"+element[2].lower()+" FROM "+element[2].lower()
+					frameParent = self.mdicoFrame[element[1]]
+				requete = "SELECT "+element[2]+" FROM "+element[3]
 				resultat = executeRequete(self.mconnexion,requete)
-				self.AjoutListeDeroulante(element[1],frameParent,self.mdicoResult['listResultEntry'][self.mcompteurEntry],resultat,element[3],element[4])
+				var = StringVar()
+				self.mdicoResult['listResultEntry'].append(var)
+				self.AjoutListeDeroulante(element[1],frameParent,self.mdicoResult['listResultEntry'][self.mcompteurEntry],resultat,element[4],element[5])
+				self.mcompteurEntry += 1
 
 			if element[0] == 'ListeDynamiqueButton':
 				if element[2] == None:
@@ -107,6 +109,9 @@ class Fenetre():
 				
 	def AfficherFenetre(self):
 		self.mfenetre.mainloop()
+
+	def GetTitre(self):
+		return self.mtitle
 
 	def GetFenetre(self):
 		return self.mfenetre

@@ -112,7 +112,7 @@ FrameConnexion = ['Frame','Connexion',None,2,GROOVE,5,5,LEFT]
 FenetreConnexion = [FrameConnexion]
 
 
-FrameEntete = ['Frame','EnTete','Connexion',2,GROOVE,5,5,TOP]
+FrameEntete = FrameEmploye = ['Frame','EnTete','Connexion',2,GROOVE,5,5,TOP]
 FenetreConnexion.append(FrameEntete)
 LabelEntete = ['Label','Entete','EnTete','Veuillez entrer vos identifiants pour vous connectez.',LEFT,5,5]
 FenetreConnexion.append(LabelEntete)
@@ -445,15 +445,3 @@ FenetreFormualireLabel.append(EntryPositionement_Label)
 
 ButtonValider_Label = ['Button','Valider','InfoLabel','Valider',Exit,TOP,5,5,'Exit']
 FenetreFormualireLabel.append(ButtonValider)
-
-# Formulaire pour un element de type Entry
-FrameFormualireEntry = ['Label','FormualireEntry',None,2,GROOVE,5,5,LEFT]
-FenetreFormualireEntry = [FrameFormualireEntry]
-
-FrameInfoEntry = ['Frame','InfoEntry','FormualireEntry',2,GROOVE,5,5,LEFT]
-FenetreFormualireEntry.append(FrameInfoEntry)
-
-LabelNomEntry = ['Label','NomEntry','InfoEntry','Nom du Entry',TOP,5,5]
-FenetreFormualireEntry.append(LabelNomEntry)
-EntryNomEntry = ['Entry','NomEntry','InfoLabel',None,TOP,5,20]
-FenetreFormualireLabel.append(EntryPositionement_Label)

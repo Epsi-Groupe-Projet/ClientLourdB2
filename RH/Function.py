@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 from ConnexionMysql import *
 import Parametre
 import Service
@@ -19,4 +21,15 @@ def AjouterUnDepartement(resultats,connexion):
 	unService = Service.Service(None,resultat[0].get(),None)
 	unService.ServiceIntoTable(connexion)
 	return True
-	
+
+def Etape1CreationFenetre(resultats,connexion):
+	resultat = resultats['listResultEntry']
+	return True
+
+def ChoixTypeElelement(resultats,connexion):
+	resultat = resultats['listResultEntry']
+	return True
+
+def Exit(resultats,connexion):
+	resultat = resultats['listResultEntry']
+	return True
